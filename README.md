@@ -1,6 +1,6 @@
 # Ohjelmistotekniikka, harjoitustyö
 this is only text but now we **bold**. but this one is _italic_
-
+muutos local
 ## Tehtävät
 ### Viikko1:
 
