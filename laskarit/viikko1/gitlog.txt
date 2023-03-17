@@ -1,0 +1,105 @@
+commit 10e8b436f23ad37959ca3513ac7c47c4696f178b
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:49:46 2023 +0200
+
+    file2 to file22
+
+ hakemisto/file2             | 0
+ hakemisto/{file1 => file22} | 0
+ hakemisto/file3             | 1 +
+ 3 files changed, 1 insertion(+)
+
+commit b27328258c599952475170396001b8aea9f59c3e
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:43:15 2023 +0200
+
+    lisätty hakemisto ja filet
+
+ hakemisto/file1 | 0
+ hakemisto/file2 | 0
+ hakemisto/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 490ccc499e72b61c2aaa4ea8c46930e58e50c069
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:39:58 2023 +0200
+
+    unohtuneet muutokset eka ja toinen
+
+ eka.txt    | 6 ------
+ toinen.txt | 8 ++++++++
+ 2 files changed, 8 insertions(+), 6 deletions(-)
+
+commit 0615e442a0e194d94c1cc21a07166bf51df988f8
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:19:39 2023 +0200
+
+    rename tiedosto to eka
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit d80927b4ed10c1ccf017e12b887605e35d2ed2c1
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:18:29 2023 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 39229039e8c81f4bbbee6a2dd021c413c7dcb41c
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:14:33 2023 +0200
+
+    tiedostoon lisäyksiä
+
+ tiedosto.txt | 784 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 783 insertions(+), 1 deletion(-)
+
+commit 4b15fde518684dda78ca07d6de00c16f2ea81007
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:07:33 2023 +0200
+
+    stuff lisätty
+
+ stuff/jokintiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 46b6e95c63f2168954f7413ecdd9580d63deaaa3
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 14:02:26 2023 +0200
+
+    toinen ja kolmas
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 7a2320087c7ab8cde419226ec9f418b604d0d40c
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 13:56:11 2023 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 1b63adb11d7c7bb62d9e7ca1ea7c78b031576e87
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 13:52:27 2023 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit e49d9395bd6f78b5bb4f78272584cdf35b165eed
+Author: Samperius <samuli.kinnunen@gmail.com>
+Date:   Fri Mar 17 11:18:02 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
