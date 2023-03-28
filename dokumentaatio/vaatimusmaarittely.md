@@ -1,0 +1,38 @@
+# Vaatimusmäärittely
+
+## Sovelluksen tarkoitus
+
+Sovelluksen avulla pystytään simuloimaan junaverkoston liikennemääriä ja verkoston pullonkaulakohtiin liittyvää junien turhaa odotusaikaa. Perusversiossa malllinnetaan ja simuloidaan vain yksi rataväli, mutta jatkokehityksenä / laajennuksena on mahdollista lisätä myös muita ratavälejä.
+
+## Käyttäjät
+
+Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä.
+
+## Käyttöliittymäluonnos
+## Perusversion tarjoama toiminnallisuus 
+
+### Avaintiedot 
+- Ohjelmaan ei tarvitse kirjautua
+- Ohjelmalla voi ajaa n määrän testiskenaarioita haluamillaan parametreilla
+- Ohjelmalla voi tallettaa testiskenaarioita ja avata aiemmin simuloituja skenaarioita
+
+## Simulaatio
+
+- Ohjelma simuloi annetulle aikavälille liikenteen:
+	- Käyttäjä pystyy muuttamaan liikennemääriä suhteessa base-skanaarioon
+	- Käyttäjä pystyy muuttamaan logiikkaa, jolla junat ohittavat pullonkaulakohdat:
+		- esim. First In First Out (FIFO) tai First In Last Out (LIFO)
+- Ohjelma laskee simulaatioiden pohjalta:
+	- verkoston pullonkaulojen aiheuttaman odotusajan eli hukan
+
+## Käyttöliittymä:
+- Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä.
+
+## Jatkokehitysideoita
+- Ohjelma voisi hakea simulaation pohjaksi perustiedot junaliikenteestä digitraffic.fi sivulta hyödyntäen avoimen datan GraphQL-rajapintaa
+	- Kuinka paljon junia ratavälillä keskimäärin liikkuu
+	- mikä on junien nopeus eri vaiheissa rataa
+	- mahdollisesti muita parametreja simuloinnin tueksi (tarkentuu myöhemmin)
+- Ohjelma on laajennettavissa kattamaan useita ratavälejä. Lopullinen tavoite tulisi olla mallintaa koko rataverkko, sillä liikenteen dynamiikka yhdellä ratavälillä vaikuttaa liikenteeseen muilla rataväleillä.
+- Ohjelmaa voisi jatkokehittää, niin että se automaattisesti etsisi optimaalista logiikkaa, jolla junat tulisi ohjata pullonkaulakohtien läpi, niin että päästäisiin pienimpään mahdolliseen odotusaikaan eli hukkaan.(Reinforcement Learning)
+
