@@ -1,25 +1,8 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-## Tehtävät
+## dokumentaatio
+[työaikakirjanpito](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/tyoaikakirjanpito.md)
 
-### Viikko1:
+[vaatimusmäärittely](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/vaatimusmaarittely.md)
 
-[gitlog](https://github.com/Samperius/ot-harjoitustyo/blob/main/laskarit/viikko1/gitlog.txt)
-
-[komentorivi](https://github.com/Samperius/ot-harjoitustyo/blob/main/laskarit/viikko1/komentorivi.txt)
-
-
-### Viikko1:
-[maksukortti](https://github.com/Samperius/ot-harjoitustyo/tree/main/laskarit/viikko2/maksukortti)
-
-[unicafe](https://github.com/Samperius/ot-harjoitustyo/tree/main/laskarit/viikko2/unicafe)
-
-[coverage screenshot](https://github.com/Samperius/ot-harjoitustyo/blob/main/laskarit/viikko2/coverage.png)
-
-## Harjoitustyö
-
-### Viikko2
-
-[työaikakirjanpito](https://github.com/Samperius/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.txt)
-
-[vaatimusmäärittely](https://github.com/Samperius/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
+[Changelog](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/changelog.md)
