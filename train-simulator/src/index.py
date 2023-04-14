@@ -1,8 +1,12 @@
 from simulator.simulate import simulate
-from entities.track import Track
-from entities.train import Train
+from ui.level import Level
+from ui.run_ui import run_ui
+import os
+
 def main():
-    simulate(Track, Train)
+    print(os.getcwd())
+    run_ui(Level)
+
 
 if __name__ == "__main__":
     main()
