@@ -19,6 +19,7 @@ Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali kä
 ## Simulaatio
 - Ohjelma simuloi junan kulkua rataosuudella:
 	- Juna liikkuu sallitulla nopeudella - **tehty**
+	- Radan pullonkaulakohdista kulkee yksi juna kerrallaan, ja muut odottavat vuoroaan - **tehty**
 	- Juna kulkee pysäkiltä toiselle kunnes saavuttaa määränpäänsä - **tehty**
 	- Useampien junien simulointi on mahdollista - **tehty**
 - Ohjelma simuloi annetulle aikavälille liikenteen:
