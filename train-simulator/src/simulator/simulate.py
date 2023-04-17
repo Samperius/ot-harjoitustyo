@@ -1,17 +1,16 @@
 from repositories.track_repository import Track_repository
 import simpy
-
-def generate_trains(level, Train, env, n_trains, start, dest, bottleneck, track, DEFAULT_IMAGE_SIZE):
+def generate_trains(level, Train, env, n_trains, start, dest, bottleneck, track):
     trains = []
     for i in range(n_trains):
-        train = Train(env, f"Train {i+1}", start, dest, bottleneck, track, DEFAULT_IMAGE_SIZE)
+        train = Train(env, f"Train {i+1}", start, dest, bottleneck, track, level)
         print(f"pääsitkö tänne?")
         print(train.image)
         level.draw_train(train)
         trains.append(train)
     return trains
 
-def simulate(level, Track, Train, n_trains, DEFAULT_IMAGE_SIZE):
+def simulate(level, Track, Train, n_trains):
     #params:
     # Dummy data to enable development:
     #muista konffata dirnamet
@@ -29,6 +28,5 @@ def simulate(level, Track, Train, n_trains, DEFAULT_IMAGE_SIZE):
     bottleneck = simpy.PreemptiveResource(env, capacity=1)
     track_repository = Track_repository()
     track = Track("Helsinki", "Tampere", stops, speed_limit, distances, track_repository)
-    trains = generate_trains(level, Train,env, n_trains, "Helsinki", "Tampere", bottleneck, track, DEFAULT_IMAGE_SIZE)
-    #train2 = Train2(env, f"Train joku", "Helsinki", "Tampere", bottleneck, track)
-    env.run(until=3)
+    trains = generate_trains(level, Train,env, n_trains, "Helsinki", "Tampere", bottleneck, track)
+    env.run(until=4)

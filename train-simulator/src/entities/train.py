@@ -4,21 +4,22 @@ import numpy as np
 
 
 class Train(pygame.sprite.Sprite):
-    def __init__(self, env, name, start, dest, bottleneck, track, DEFAULT_IMAGE_SIZE):
+    def __init__(self, env, name, start, dest, bottleneck, track, level):
         super().__init__()
-        self.image = pygame.transform.scale(pygame.image.load("./src/visuals/train.png"), DEFAULT_IMAGE_SIZE/2)
+        self.image = pygame.transform.scale(pygame.image.load("./src/visuals/train.png"), level.default_image_size/2)
         self.env = env
         self.name = name
         self.start = start
         self.dest = dest
-        self.cell_size = DEFAULT_IMAGE_SIZE[0]
+        self.cell_size = level.cell_size
         self.process = env.process(self.driving(bottleneck, track))
-        #env.process(self.reaching_bottleneck())
+        env.process(self.reaching_bottleneck())
         self.next_stop = track.next_stop(start)
         self.rect = self.image.get_rect()
         self.rect.x = track.start[0]
         self.rect.y = track.start[1]
         self.timex = 1
+        self.level = level
 
 
     def driving(self, bottleneck, track):
@@ -31,6 +32,7 @@ class Train(pygame.sprite.Sprite):
 
             while time_to_stop:
                 try:
+
                     start = self.env.now
                     yield self.env.timeout(self.timex*time_to_stop)
                     time_to_stop = 0
@@ -46,8 +48,9 @@ class Train(pygame.sprite.Sprite):
                 print(f"{self.name}: trip complete")
                 break
             else:
+                self.move_train(12.5, 0)
                 self.next_stop = track.next_stop(self.next_stop)
-                self.move_train(10,0)
+
 
     def reaching_bottleneck(self):
         while True:
@@ -63,3 +66,6 @@ class Train(pygame.sprite.Sprite):
 
     def move_train(self, dx=0, dy=0):
         self.rect.move_ip(dx*self.cell_size, dy*self.cell_size)
+        self.level.all_sprites.draw(self.level.display)
+        pygame.display.update()
+
