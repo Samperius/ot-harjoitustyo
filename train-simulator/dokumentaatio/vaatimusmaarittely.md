@@ -6,27 +6,31 @@ Sovelluksen avulla pystytään simuloimaan junaverkoston liikennemääriä ja ve
 
 ## Käyttäjät
 
-Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä.
+Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä.	
 
 ## Käyttöliittymäluonnos
 ## Perusversion tarjoama toiminnallisuus 
 
 ### Avaintiedot 
-- Ohjelmaan ei tarvitse kirjautua
-- Ohjelmalla voi ajaa n määrän testiskenaarioita haluamillaan parametreilla
-- Ohjelmalla voi tallettaa testiskenaarioita ja avata aiemmin simuloituja skenaarioita
+- Ohjelmaan ei tarvitse kirjautua - tehty (ei vaadi toimenpiteitä)
+- Ohjelmalla voi ajaa n määrän testiskenaarioita haluamillaan parametreilla - työn alla
+- Ohjelmalla voi tallettaa testiskenaarioita ja avata aiemmin simuloituja skenaarioita - aloittamatta
 
 ## Simulaatio
-
+- Ohjelma simuloi junan kulkua rataosuudella:
+	- Juna liikkuu sallitulla nopeudella - **tehty**
+	- Juna kulkee pysäkiltä toiselle kunnes saavuttaa määränpäänsä - **tehty**
+	- Useampien junien simulointi on mahdollista - **tehty**
 - Ohjelma simuloi annetulle aikavälille liikenteen:
 	- Käyttäjä pystyy muuttamaan liikennemääriä suhteessa base-skanaarioon
 	- Käyttäjä pystyy muuttamaan logiikkaa, jolla junat ohittavat pullonkaulakohdat:
 		- esim. First In First Out (FIFO) tai First In Last Out (LIFO)
 - Ohjelma laskee simulaatioiden pohjalta:
-	- verkoston pullonkaulojen aiheuttaman odotusajan eli hukan
+	- verkoston pullonkaulojen aiheuttaman odotusajan eli hukan 
 
 ## Käyttöliittymä:
-- Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä.
+- Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä. - Yksinkertaistetun käyttöliittymän v.1.0 **tehty**
+- Käyttöliittymässä parametrien muuttaminen on mahdollista
 
 ## Jatkokehitysideoita
 - Ohjelma voisi hakea simulaation pohjaksi perustiedot junaliikenteestä digitraffic.fi sivulta hyödyntäen avoimen datan GraphQL-rajapintaa
