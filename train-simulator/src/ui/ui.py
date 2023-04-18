@@ -2,8 +2,8 @@ import pygame
 from ui.static_sprites import StaticSprite
 import numpy as np
 
-class Level:
-    def __init__(self, level_map, CELL_SIZE, display):
+class Ui:
+    def __init__(self, MAP, CELL_SIZE, display):
         self.cell_size = CELL_SIZE
         self.trains = pygame.sprite.Group()
         self.tracks = pygame.sprite.Group()
@@ -11,17 +11,17 @@ class Level:
         self.stops = pygame.sprite.Group()
         self.bottlenecks = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.Group()
-        self.level_map = level_map
-        self._initialize_sprites(level_map)
+        self.MAP = MAP
+        self._initialize_sprites(MAP)
         self.display = display
 
-    def _initialize_sprites(self, level_map, ):
-        height = level_map.shape[0]
-        width = level_map.shape[1]
+    def _initialize_sprites(self, MAP, ):
+        height = MAP.shape[0]
+        width = MAP.shape[1]
 
         for y in range(height):
             for x in range(width):
-                cell = level_map[y,x]
+                cell = MAP[y,x]
                 normalized_x = x * self.cell_size
                 normalized_y = y * self.cell_size
 
@@ -45,15 +45,7 @@ class Level:
         train.rect.x = train.rect.x * self.cell_size
         train.rect.y = train.rect.y * self.cell_size
         self.trains.add(train)
-        print("olen täällä")
         self.all_sprites.add(
             self.trains
         )
         self.all_sprites.draw(self.display)
-
-
-
-
-    def update_train(self):
-        #tässä päivitetään junien sijainnit?
-        ...

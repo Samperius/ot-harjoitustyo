@@ -3,7 +3,7 @@ class Track:
     def __init__(self, start, dest, stops, speed_limit, distances, track_repository):
         # naming tracks allows expanding program to multiple tracks
         self.name = "-".join((start, dest))
-        self.start_xy = track_repository.station_xy_coordinates(start)
+        self.start_xy = track_repository.station_xy_coordinates()
         self.start = start
         self.dest = dest
         # this data should be imported from database - to be modified later

@@ -3,19 +3,19 @@ import pygame
 
 
 class Train(pygame.sprite.Sprite):
-    def __init__(self, env, name, bottleneck, track, level):
+    def __init__(self, env, name, bottleneck, track, user_interface):
         super().__init__()
-        self.image = pygame.Surface([level.cell_size, level.cell_size])
+        self.image = pygame.Surface([user_interface.cell_size, user_interface.cell_size])
         self.image.fill(pygame.Color(255, 0, 0, 255))
         self.env = env
         self.name = name
         self.process = env.process(self.driving(bottleneck, track))
-        env.process(self.reaching_bottleneck())
+        #env.process(self.reaching_bottleneck())
         self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
         self.rect.x = track.start_xy[0]
         self.rect.y = track.start_xy[1]
-        self.level = level
+        self.user_interface = user_interface
 
 
     def driving(self, bottleneck, track):
@@ -26,7 +26,7 @@ class Train(pygame.sprite.Sprite):
             one_km = 1/speed
             start = self.env.now
             print(
-                f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km/"
+                f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km"
                 f"  to {self.next_stop} with {speed} km/h")
             while time_to_stop:
                 try:
@@ -65,6 +65,6 @@ class Train(pygame.sprite.Sprite):
             break
 
     def move_train(self, d_x=0, d_y=0):
-        self.rect.move_ip(d_x*self.level.cell_size, d_y*self.level.cell_size)
-        self.level.all_sprites.draw(self.level.display)
+        self.rect.move_ip(d_x*self.user_interface.cell_size, d_y*self.user_interface.cell_size)
+        self.user_interface.all_sprites.draw(self.user_interface.display)
         pygame.display.update()

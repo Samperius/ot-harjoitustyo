@@ -1,23 +1,23 @@
 import unittest
-from src.entities.train import Train
-from src.entities.track import Track
-from src.repositories.track_repository import Track_repository
+from entities.train import Train
+from entities.track import Track
+from repositories.track_repository import TrackRepository
 import simpy
-from src.ui.level import Level
+from src.ui.ui import Ui
 import numpy as np
 import pygame
 
 width = 200
 height = 50
 
-LEVEL_MAP = np.zeros((height,width))
-LEVEL_MAP[height//2,:] = np.ones(width)
-LEVEL_MAP[height//2,0] = 2
-LEVEL_MAP[height//2,width-1] = 2
-LEVEL_MAP[height//2,width//2] = 2
-LEVEL_MAP[height//2,width//3] = 3
+MAP = np.zeros((height,width))
+MAP[height//2,:] = np.ones(width)
+MAP[height//2,0] = 2
+MAP[height//2,width-1] = 2
+MAP[height//2,width//2] = 2
+MAP[height//2,width//3] = 3
 
-CELL_SIZE = 10
+CELL_SIZE = 1
 DEFAULT_IMAGE_SIZE = np.array((CELL_SIZE, CELL_SIZE))
 
 
@@ -34,15 +34,22 @@ class TestTrack(unittest.TestCase):
         display_height = height * CELL_SIZE
         display_width = width * CELL_SIZE
         display = pygame.display.set_mode((display_width, display_height))
-        level = Level(LEVEL_MAP, CELL_SIZE, DEFAULT_IMAGE_SIZE, display)
-        track_repo = Track_repository()
-
+        ui = Ui(MAP, CELL_SIZE, display)
+        track_repo = TrackRepository()
         self.track = Track("Helsinki", "Tampere", stops,
                            speed_limit, distances, track_repo)
+        env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
         bottleneck = simpy.PreemptiveResource(env, capacity=1)
-        self.train = Train(env, f"Train {1}","Helsinki", "Tampere", bottleneck, self.track, level)
+        self.train = Train(env, "Train", bottleneck, self.track, ui)
 
     def test_move_x_train(self):
         before_move = self.train.rect.x
-        after_move = self.train.move_train(11,0)
+        self.train.move_train(11,0)
+        after_move = self.train.rect.x
+        self.assertEqual(before_move + 11, after_move)
+
+    def test_move_y_train(self):
+        before_move = self.train.rect.x
+        self.train.move_train(11,0)
+        after_move = self.train.rect.x
         self.assertEqual(before_move + 11, after_move)

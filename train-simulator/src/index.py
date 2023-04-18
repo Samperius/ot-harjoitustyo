@@ -1,11 +1,11 @@
 import os
-from ui.level import Level
+from ui.ui import Ui
 from ui.run_ui import run_ui
 
 
 def main():
     print(os.getcwd())
-    run_ui(Level)
+    run_ui(Ui)
 
 
 if __name__ == "__main__":

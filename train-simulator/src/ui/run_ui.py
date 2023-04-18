@@ -7,17 +7,17 @@ from simulator.simulate import simulate
 width = 200
 height = 50
 
-LEVEL_MAP = np.zeros((height,width))
-LEVEL_MAP[height//2,:] = np.ones(width)
-LEVEL_MAP[height//2,0] = 2
-LEVEL_MAP[height//2,width-1] = 2
-LEVEL_MAP[height//2,width//2] = 2
-LEVEL_MAP[height//2,width//3] = 3
+MAP = np.zeros((height,width))
+MAP[height//2,:] = np.ones(width)
+MAP[height//2,0] = 2
+MAP[height//2,width-1] = 2
+MAP[height//2,width//2] = 2
+MAP[height//2,width//3] = 3
 
 CELL_SIZE = 10
-def run_ui(Level):
-    height = LEVEL_MAP.shape[0]
-    width = LEVEL_MAP.shape[1]
+def run_ui(Ui):
+    height = MAP.shape[0]
+    width = MAP.shape[1]
     display_height = height * CELL_SIZE
     display_width = width * CELL_SIZE
 
@@ -25,13 +25,13 @@ def run_ui(Level):
 
     pygame.display.set_caption("Train simulator")
 
-    level = Level(LEVEL_MAP, CELL_SIZE, display)
+    user_interface = Ui(MAP, CELL_SIZE, display)
 
     pygame.init()
-    level.all_sprites.draw(display)
+    user_interface.all_sprites.draw(display)
     pygame.display.update()
-    simulate(level, Track, Train, 5)
-    level.all_sprites.draw(display)
+    simulate(user_interface, Track, Train, 5)
+    user_interface.all_sprites.draw(display)
 
 
     running = True

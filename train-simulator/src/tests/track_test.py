@@ -1,10 +1,10 @@
 import unittest
-from src.entities.track import Track
-from src.repositories.track_repository import Track_repository
+from entities.track import Track
+from repositories.track_repository import TrackRepository
 
 class TestTrack(unittest.TestCase):
     def setUp(self):
-        track_repo = Track_repository()
+        track_repo = TrackRepository()
         # Dummy data to the first test's development. later stops etc. are imported from a database
         stops = ["Helsinki", "Pasila", "Tikkurila", "Hämeenlinna",
                  "Tampere"]  # this data should be imported from database - to be modified later
@@ -27,6 +27,9 @@ class TestTrack(unittest.TestCase):
 
     def test_next_stop_beginning(self):
         self.assertEqual(self.track.next_stop("Helsinki"), "Pasila")
+
+    def test_next_stop_mid(self):
+        self.assertEqual(self.track.next_stop("Tikkurila"), "Hämeenlinna")
 
     def test_next_stop_for_last_stop(self):
         self.assertEqual(self.track.next_stop("Tampere"), "Tampere")
