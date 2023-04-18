@@ -1,7 +1,7 @@
-from simulator.simulate import simulate
+import os
 from ui.level import Level
 from ui.run_ui import run_ui
-import os
+
 
 def main():
     print(os.getcwd())

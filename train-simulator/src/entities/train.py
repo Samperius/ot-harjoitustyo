@@ -1,24 +1,20 @@
 import simpy
 import pygame
-import numpy as np
 
 
 class Train(pygame.sprite.Sprite):
-    def __init__(self, env, name, start, dest, bottleneck, track, level):
+    def __init__(self, env, name, bottleneck, track, level):
         super().__init__()
-        self.image = pygame.transform.scale(pygame.image.load("./src/visuals/train.png"), level.default_image_size/2)
+        self.image = pygame.Surface([level.cell_size, level.cell_size])
+        self.image.fill(pygame.Color(255, 0, 0, 255))
         self.env = env
         self.name = name
-        self.start = start
-        self.dest = dest
-        self.cell_size = level.cell_size
         self.process = env.process(self.driving(bottleneck, track))
         env.process(self.reaching_bottleneck())
-        self.next_stop = track.next_stop(start)
+        self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
-        self.rect.x = track.start[0]
-        self.rect.y = track.start[1]
-        self.timex = 1
+        self.rect.x = track.start_xy[0]
+        self.rect.y = track.start_xy[1]
         self.level = level
 
 
@@ -27,28 +23,34 @@ class Train(pygame.sprite.Sprite):
             distance_to_stop = track.distance_to_stop(self.next_stop)
             speed = track.speed_to_stop(self.next_stop)
             time_to_stop = distance_to_stop / speed
+            one_km = 1/speed
+            start = self.env.now
             print(
-                f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km  to {self.next_stop} with {speed} km/h")
-
+                f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km/"
+                f"  to {self.next_stop} with {speed} km/h")
             while time_to_stop:
                 try:
+                    if time_to_stop > one_km:
+                        yield self.env.timeout(one_km)
+                        time_to_stop = time_to_stop - one_km
+                        self.move_train(1, 0)
+                    else:
+                        yield self.env.timeout(time_to_stop)
+                        time_to_stop = 0
 
-                    start = self.env.now
-                    yield self.env.timeout(self.timex*time_to_stop)
-                    time_to_stop = 0
                 except simpy.Interrupt:
                     time_to_stop = time_to_stop - (self.env.now - start)
                     with bottleneck.request() as req:
                         yield req
-                        yield self.env.timeout(self.timex*0.3)
+                        yield self.env.timeout(0.3)
                         print(
-                            f"{self.name}: time {self.env.now:.1f}h - time for you to continue, time to destination {time_to_stop:.1f}")
+                            f"{self.name}: time {self.env.now:.1f}h - /"
+                            f"time for you to continue, time to destination {time_to_stop:.1f}")
             print(f"{self.name}: time {self.env.now:.1f}h - {self.next_stop} reached")
             if self.next_stop == track.next_stop(self.next_stop):
                 print(f"{self.name}: trip complete")
                 break
-            else:
-                self.move_train(12.5, 0)
+            if self.next_stop != track.next_stop(self.next_stop):
                 self.next_stop = track.next_stop(self.next_stop)
 
 
@@ -56,16 +58,13 @@ class Train(pygame.sprite.Sprite):
         while True:
             time_to_bottleneck = 1
             while time_to_bottleneck:
-                yield self.env.timeout(self.timex*time_to_bottleneck)
+                yield self.env.timeout(time_to_bottleneck)
                 print(f"{self.name}: time {self.env.now:.1f}h - bottleneck reached")
                 self.process.interrupt()
                 time_to_bottleneck = 0
             break
 
-
-
-    def move_train(self, dx=0, dy=0):
-        self.rect.move_ip(dx*self.cell_size, dy*self.cell_size)
+    def move_train(self, d_x=0, d_y=0):
+        self.rect.move_ip(d_x*self.level.cell_size, d_y*self.level.cell_size)
         self.level.all_sprites.draw(self.level.display)
         pygame.display.update()
-

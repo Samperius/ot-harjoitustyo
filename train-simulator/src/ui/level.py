@@ -1,26 +1,21 @@
 import pygame
-from ui.static_sprites import Forest
-from ui.static_sprites import Track
-from ui.static_sprites import Stop
-from ui.static_sprites import Bottleneck
-
+from ui.static_sprites import StaticSprite
 import numpy as np
 
 class Level:
-    def __init__(self, level_map, cell_size, DEFAULT_IMAGE_SIZE, display):
-        self.cell_size = cell_size
+    def __init__(self, level_map, CELL_SIZE, display):
+        self.cell_size = CELL_SIZE
         self.trains = pygame.sprite.Group()
         self.tracks = pygame.sprite.Group()
         self.forests = pygame.sprite.Group()
         self.stops = pygame.sprite.Group()
         self.bottlenecks = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.Group()
-        self.default_image_size = DEFAULT_IMAGE_SIZE
         self.level_map = level_map
-        self._initialize_sprites(level_map, DEFAULT_IMAGE_SIZE)
+        self._initialize_sprites(level_map)
         self.display = display
 
-    def _initialize_sprites(self, level_map, DEFAULT_IMAGE_SIZE):
+    def _initialize_sprites(self, level_map, ):
         height = level_map.shape[0]
         width = level_map.shape[1]
 
@@ -31,13 +26,13 @@ class Level:
                 normalized_y = y * self.cell_size
 
                 if cell == 0:
-                    self.forests.add(Forest(normalized_x, normalized_y, DEFAULT_IMAGE_SIZE))
+                    self.forests.add(StaticSprite(normalized_x, normalized_y, self.cell_size, pygame.Color(0, 255, 0, 255)))
                 elif cell == 1:
-                    self.tracks.add(Track(normalized_x, normalized_y, DEFAULT_IMAGE_SIZE))
+                    self.tracks.add(StaticSprite(normalized_x, normalized_y, self.cell_size, pygame.Color(190, 190, 190, 255)))
                 elif cell == 2:
-                    self.stops.add(Stop(normalized_x, normalized_y, DEFAULT_IMAGE_SIZE))
+                    self.stops.add(StaticSprite(normalized_x, normalized_y, self.cell_size, pygame.Color(0, 0, 0, 255)))
                 elif cell == 3:
-                    self.bottlenecks.add(Bottleneck(normalized_x, normalized_y, DEFAULT_IMAGE_SIZE))
+                    self.bottlenecks.add(StaticSprite(normalized_x, normalized_y, self.cell_size, pygame.Color(255, 165, 0, 255)))
 
         self.all_sprites.add(
             self.forests,
