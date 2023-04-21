@@ -1,0 +1,9 @@
+start,dest,distance,speedlimit
+Helsinki-P,Pasila-P,5,60
+Pasila-E,Helsinki-E,5,50
+Pasila-P,Tikkurila-P,7,70
+Tikkurila-E,Pasila-E,7,70
+Tikkurila-P,Hämeenlinna-P,90,120
+Hämeenlinna-E,Tikkurila-E,90,100
+Hämeenlinna-P,Tampere-P,80,120
+Tampere-E,Hämeenlinna-E,80,110

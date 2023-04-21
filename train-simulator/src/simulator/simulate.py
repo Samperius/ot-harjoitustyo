@@ -1,5 +1,6 @@
 import simpy
 from repositories.track_repository import TrackRepository
+from database_connection import get_database_connection
 
 def generate_trains(user_interface, Train, env, n_trains, bottleneck, track):
     trains = []
@@ -19,7 +20,8 @@ def simulate(user_interface, Track, Train, n_trains):
     env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
     #To-do: Useampi bottleneck
     bottleneck = simpy.PreemptiveResource(env, capacity=1)
-    track_repository = TrackRepository()
-    track = Track("Helsinki", "Tampere", stops, speed_limit, distances, track_repository)
+    connection = get_database_connection()
+    track_repository = TrackRepository(connection)
+    track = Track("Helsinki-P", "Tampere-P", stops, speed_limit, distances, track_repository)
     generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
     env.run(until=5)

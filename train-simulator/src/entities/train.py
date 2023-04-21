@@ -47,10 +47,10 @@ class Train(pygame.sprite.Sprite):
                             f"{self.name}: time {self.env.now:.1f}h - /"
                             f"time for you to continue, time to destination {time_to_stop:.1f}")
             print(f"{self.name}: time {self.env.now:.1f}h - {self.next_stop} reached")
-            if self.next_stop == track.next_stop(self.next_stop):
+            if track.next_stop(self.next_stop) is None:
                 print(f"{self.name}: trip complete")
                 break
-            if self.next_stop != track.next_stop(self.next_stop):
+            else:
                 self.next_stop = track.next_stop(self.next_stop)
 
 
