@@ -2,7 +2,7 @@ class TrackRepository:
     def __init__(self, connection):
         self._connection = connection
     def station_xy_coordinates(self):
-        return ((0, 25))
+        return ((170, 25))
 
     def distance_to_next_stop(self, dest):
         cursor = self._connection.cursor()
@@ -16,7 +16,7 @@ class TrackRepository:
         cursor.execute(f"select dest from track where start='{start}'")
         try:
             element = cursor.fetchone()[0]
-        except:
+        except TypeError:
             return
 
         print(element)
