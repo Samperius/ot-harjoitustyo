@@ -56,11 +56,6 @@ def create_tables(connection):
     pathtocsv = os.path.join(dirname, "data", "bottlenecks.csv")
     bottlenecks = pd.read_csv(pathtocsv)  # load to DataFrame
     bottlenecks.to_sql('bottlenecks', connection, if_exists='append', index=False)  # write to sqlite table
-    cursor.execute(f"select * from bottlenecks")
-    x = cursor.fetchall()
-    for el in x:
-        print(el[0])
-
 def initialize_database():
     connection = get_database_connection()
 

@@ -16,6 +16,6 @@ def simulate(user_interface, Track, Train, n_trains):
     track_repository = TrackRepository(connection)
     track = Track("Helsinki-P", "Tampere-P", track_repository)
     generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
-    #track = Track("Jyväskylä-E", "Helsinki-E", track_repository)
-    #generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
+    track = Track("Jyväskylä-E", "Helsinki-E", track_repository)
+    generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
     env.run(until=5)

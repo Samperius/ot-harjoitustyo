@@ -1,9 +1,9 @@
 import os
 import sqlite3
+from pathlib import Path
+from config import DATABASE_FILE_PATH
 
-dirname = os.path.dirname("/home/samuli/School/OT/ot-harjoitustyo/train-simulator/")
-pathtodatabase = os.path.join(dirname, "data","TrainSimulator.db")
-connection = sqlite3.connect(pathtodatabase)
+connection = sqlite3.connect(DATABASE_FILE_PATH)
 connection.row_factory = sqlite3.Row
 
 
