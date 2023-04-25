@@ -519,6 +519,27 @@ files = [
 ]
 
 [[package]]
+name = "pygame-menu"
+version = "4.4.2"
+description = "A menu for pygame. Simple, and easy to use"
+category = "main"
+optional = false
+python-versions = ">=3.6, <4"
+files = [
+    {file = "pygame-menu-4.4.2.tar.gz", hash = "sha256:5950500071217d054f806eab07b2324a4c2c591e613e6923fdc8765198aeb8e4"},
+    {file = "pygame_menu-4.4.2-py3-none-any.whl", hash = "sha256:ec1861686aae8235d1048822a4ab677d02469d00b176d24b49b7e6743037a752"},
+]
+
+[package.dependencies]
+pygame = ">=1.9.3"
+pyperclip = "*"
+typing-extensions = "*"
+
+[package.extras]
+docs = ["sphinx", "sphinx-autodoc-typehints (>=1.2.0)", "sphinx-rtd-theme"]
+test = ["codecov", "nose2"]
+
+[[package]]
 name = "pylint"
 version = "2.17.2"
 description = "python code static checker"
@@ -547,6 +568,17 @@ typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""
 [package.extras]
 spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
+
+[[package]]
+name = "pyperclip"
+version = "1.8.2"
+description = "A cross-platform clipboard module for Python. (Only handles plain text for now.)"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyperclip-1.8.2.tar.gz", hash = "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"},
+]
 
 [[package]]
 name = "pytest"
@@ -713,7 +745,7 @@ files = [
 name = "typing-extensions"
 version = "4.5.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -821,4 +853,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "2bec6100ad75a216daa61cf91bbdfe7bcb5f918c1f29f1bfcf86ab809ecb6618"
+content-hash = "603d907605761bc437661a7626462d39b53dd66bced3e2b110d32fbc15976869"

@@ -7,6 +7,13 @@ def drop_tables(connection):
     cursor.execute('''
         drop table if exists track;
     ''')
+    cursor.execute('''
+        drop table if exists stop_coordinates;
+    ''')
+    cursor.execute('''
+        drop table if exists bottlenecks;
+    ''')
+
 
     connection.commit()
 
@@ -22,25 +29,43 @@ def create_tables(connection):
             speedlimit integer
         );
     ''')
-
     dirname = os.path.dirname("/home/samuli/School/OT/ot-harjoitustyo/train-simulator/")
     pathtocsv = os.path.join(dirname, "data", "track.csv")
-    orders = pd.read_csv(pathtocsv)  # load to DataFrame
-    #print(orders.columns)
-    orders.to_sql('track', connection, if_exists='append', index=False)  # write to sqlite table
-
-    row1 = cursor.execute(f"select dest from track where start='Helsinki-P'")
-    row1 = row1.fetchone()
-    print(row1[0])
-    connection.commit()
-
+    track = pd.read_csv(pathtocsv)  # load to DataFrame
+    track.to_sql('track', connection, if_exists='append', index=False)  # write to sqlite table
+    #stop coordinates:
+    cursor.execute('''
+        create table stop_coordinates (
+            stop text primary key,
+            y integer,
+            x integer
+        );
+    ''')
+    pathtocsv = os.path.join(dirname, "data", "stop_coordinates.csv")
+    stop_coordinates = pd.read_csv(pathtocsv)  # load to DataFrame
+    stop_coordinates.to_sql('stop_coordinates', connection, if_exists='append', index=False)  # write to sqlite table
+    #bottleneck:
+    cursor.execute('''
+        create table bottlenecks (
+            bottleneck text primary key,
+            capacity integer,
+            y integer,
+            x integer
+        );
+    ''')
+    pathtocsv = os.path.join(dirname, "data", "bottlenecks.csv")
+    bottlenecks = pd.read_csv(pathtocsv)  # load to DataFrame
+    bottlenecks.to_sql('bottlenecks', connection, if_exists='append', index=False)  # write to sqlite table
+    cursor.execute(f"select * from bottlenecks")
+    x = cursor.fetchall()
+    for el in x:
+        print(el[0])
 
 def initialize_database():
     connection = get_database_connection()
 
     drop_tables(connection)
     create_tables(connection)
-
 
 if __name__ == "__main__":
     initialize_database()

@@ -7,3 +7,5 @@ Tikkurila-P,Hämeenlinna-P,90,120
 Hämeenlinna-E,Tikkurila-E,90,100
 Hämeenlinna-P,Tampere-P,80,120
 Tampere-E,Hämeenlinna-E,80,110
+Tampere-P,Jyväskylä-P,150,100
+Jyväskylä-E,Tampere-E,150,100

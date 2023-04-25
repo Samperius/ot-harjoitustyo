@@ -10,20 +10,12 @@ def generate_trains(user_interface, Train, env, n_trains, bottleneck, track):
         trains.append(train)
 
 def simulate(user_interface, Track, Train, n_trains):
-    stops = ["Helsinki", "Pasila", "Tikkurila", "Hämeenlinna",
-             "Tampere"]  # this data should be imported from database
-    speed_limit = {"Pasila": 60, "Tikkurila": 70, "Hämeenlinna": 120,
-                   "Tampere": 100}  # this data should be imported from database
-    distances = {"Pasila": 5, "Tikkurila": 15, "Hämeenlinna": 60,
-                 "Tampere": 100}  # this data should be imported from database
-
-    env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
-    #To-do: Useampi bottleneck
+    env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1, strict=False)
     bottleneck = simpy.PreemptiveResource(env, capacity=1)
     connection = get_database_connection()
     track_repository = TrackRepository(connection)
-    #track = Track("Helsinki-P", "Tampere-P", stops, speed_limit, distances, track_repository)
-    #generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
-    track = Track("Tampere-E", "Helsinki-E", stops, speed_limit, distances, track_repository)
+    track = Track("Helsinki-P", "Tampere-P", track_repository)
+    generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
+    track = Track("Jyväskylä-E", "Helsinki-E", track_repository)
     generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
     env.run(until=5)

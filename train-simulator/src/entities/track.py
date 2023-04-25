@@ -1,17 +1,12 @@
 
 class Track:
-    def __init__(self, start, dest, stops, speed_limit, distances, track_repository):
-        # naming tracks allows expanding program to multiple tracks
-        self.name = "-".join((start, dest))
+    def __init__(self, start, dest, track_repository):
         self.track_repository = track_repository
-        self.start_xy = track_repository.station_xy_coordinates()
+        self.start_xy = track_repository.station_xy_coordinates(start)
         self.start = start
         self.dest = dest
         # this data should be imported from database - to be modified later
-        self.stops = stops
-        self.speed_limits = speed_limit
-        self.distances = distances
-        self.bottlenecks = []  # bottlenecks counted based on distance from the start
+        self.bottlenecks = track_repository.return_all_bottlenecks()  # bottlenecks counted based on distance from the start
     # returns the distance to the next bottleneck
 
     def next_stop(self, current_stop):

@@ -13,10 +13,10 @@ class Train(pygame.sprite.Sprite):
         env.process(self.reaching_bottleneck())
         self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
-        self.rect.x = track.start_xy[0]
-        self.rect.y = track.start_xy[1]
+        self.track = track
+        self.rect.x = track.start_xy[0]-1
+        self.rect.y = track.start_xy[1]-1
         self.user_interface = user_interface
-
     def driving(self, bottleneck, track):
         while True:
             distance_to_stop = track.distance_to_stop(self.next_stop)
@@ -31,14 +31,11 @@ class Train(pygame.sprite.Sprite):
                 try:
                     if time_to_stop > one_km:
                         yield self.env.timeout(one_km)
+                        self.move_train(time_to_stop, one_km)
                         time_to_stop = time_to_stop - one_km
-                        direction = self.next_stop.split('-')[1]
-                        if direction == 'P':
-                            self.move_train(1, 0)
-                        elif direction == 'E':
-                            self.move_train(-1,0)
                     else:
                         yield self.env.timeout(time_to_stop)
+                        self.move_train(time_to_stop, one_km)
                         time_to_stop = 0
 
                 except simpy.Interrupt:
@@ -56,7 +53,6 @@ class Train(pygame.sprite.Sprite):
             else:
                 self.next_stop = track.next_stop(self.next_stop)
 
-
     def reaching_bottleneck(self):
         while True:
             time_to_bottleneck = 1
@@ -67,7 +63,28 @@ class Train(pygame.sprite.Sprite):
                 time_to_bottleneck = 0
             break
 
-    def move_train(self, d_x=0, d_y=0):
+    def is_bottleneck_near(self):
+        for bottleneck in self.track.bottlenecks:
+            b_coordinates = self.track.track_repository.bottleneck_xy_coordinates(bottleneck)
+            current_coordinates = self.rect.x
+            return
+
+
+
+
+    def move_train(self, time_to_stop, one_km):
+        direction = self.next_stop.split('-')[1]
+        if time_to_stop < one_km:
+            multiplier = time_to_stop/one_km
+        else:
+            multiplier = 1
+
+        if direction == 'P':
+            d_x = 0
+            d_y = -1 * multiplier
+        elif direction == 'E':
+            d_x = 0
+            d_y = 1 * multiplier
         self.rect.move_ip(d_x*self.user_interface.cell_size, d_y*self.user_interface.cell_size)
         self.user_interface.all_sprites.draw(self.user_interface.display)
         pygame.display.update()
