@@ -30,7 +30,6 @@ def initialize_map():
     for stop in stops:
         direction = stop.split("-")[1]
         stop_coordinate = track_repository.station_xy_coordinates(stop)
-        print(direction)
         if direction == "P" or direction == "E":
             MAP[:, stop_coordinate[0]-1] = np.ones(height)
 
@@ -83,7 +82,7 @@ def run_ui(Ui):
     pygame.init()
     user_interface.all_sprites.draw(display)
     pygame.display.update()
-    simulate(user_interface, Track, Train, 5)
+    simulate(user_interface, Track, Train, 1)
     user_interface.all_sprites.draw(display)
 
 

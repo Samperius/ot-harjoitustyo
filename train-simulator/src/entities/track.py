@@ -5,9 +5,7 @@ class Track:
         self.start_xy = track_repository.station_xy_coordinates(start)
         self.start = start
         self.dest = dest
-        # this data should be imported from database - to be modified later
-        self.bottlenecks = track_repository.return_all_bottlenecks()  # bottlenecks counted based on distance from the start
-    # returns the distance to the next bottleneck
+        self.bottlenecks = track_repository.return_all_bottlenecks()
 
     def next_stop(self, current_stop):
         return self.track_repository.next_stop(current_stop)

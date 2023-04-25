@@ -10,13 +10,14 @@ class Train(pygame.sprite.Sprite):
         self.env = env
         self.name = name
         self.process = env.process(self.driving(bottleneck, track))
-        env.process(self.reaching_bottleneck())
+        #env.process(self.reaching_bottleneck())
         self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
         self.track = track
         self.rect.x = track.start_xy[0]-1
         self.rect.y = track.start_xy[1]-1
         self.user_interface = user_interface
+        self.last_stop = False
     def driving(self, bottleneck, track):
         while True:
             distance_to_stop = track.distance_to_stop(self.next_stop)
@@ -44,14 +45,16 @@ class Train(pygame.sprite.Sprite):
                         yield req
                         yield self.env.timeout(0.3)
                         print(
-                            f"{self.name}: time {self.env.now:.1f}h - /"
-                            f"time for you to continue, time to destination {time_to_stop:.1f}")
+                            f"{self.name}: time {self.env.now:.1f}h - time for you to continue, "
+                            f"time to destination {time_to_stop:.1f}")
             print(f"{self.name}: time {self.env.now:.1f}h - {self.next_stop} reached")
-            if track.next_stop(self.next_stop) is None:
+            if self.last_stop:
                 print(f"{self.name}: trip complete")
                 break
             else:
                 self.next_stop = track.next_stop(self.next_stop)
+                if self.next_stop == self.track.dest:
+                    self.last_stop = True
 
     def reaching_bottleneck(self):
         while True:

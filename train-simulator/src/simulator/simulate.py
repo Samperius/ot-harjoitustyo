@@ -10,12 +10,12 @@ def generate_trains(user_interface, Train, env, n_trains, bottleneck, track):
         trains.append(train)
 
 def simulate(user_interface, Track, Train, n_trains):
-    env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1, strict=False)
+    env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=0.001, strict=False)
     bottleneck = simpy.PreemptiveResource(env, capacity=1)
     connection = get_database_connection()
     track_repository = TrackRepository(connection)
     track = Track("Helsinki-P", "Tampere-P", track_repository)
     generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
-    track = Track("Jyväskylä-E", "Helsinki-E", track_repository)
-    generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
+    #track = Track("Jyväskylä-E", "Helsinki-E", track_repository)
+    #generate_trains(user_interface, Train, env, n_trains, bottleneck, track)
     env.run(until=5)
