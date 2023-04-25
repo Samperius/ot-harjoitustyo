@@ -3,7 +3,7 @@ from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
 import simpy
-from src.ui.ui import Ui
+from ui.ui import Ui
 import numpy as np
 import pygame
 
