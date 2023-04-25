@@ -2,8 +2,6 @@ import numpy as np
 import pygame
 import pygame_menu
 from pygame_menu import themes
-from entities.track import Track
-from entities.train import Train
 from simulator.simulate import simulate
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
@@ -82,7 +80,7 @@ def run_ui(Ui):
     pygame.init()
     user_interface.all_sprites.draw(display)
     pygame.display.update()
-    simulate(user_interface, Track, Train, 1)
+    simulate(user_interface, 1)
     user_interface.all_sprites.draw(display)
 
 

@@ -1,6 +1,5 @@
 import os
 from ui.ui import Ui
-from ui.run_ui import run_menu
 from ui.run_ui import run_ui
 
 

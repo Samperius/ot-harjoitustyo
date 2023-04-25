@@ -9,11 +9,6 @@ class Track:
 
     def next_stop(self, current_stop):
         return self.track_repository.next_stop(current_stop)
-        next_stop_indx = self.stops.index(current_stop)+1
-        if next_stop_indx == len(self.stops):
-            return self.stops[-1]
-        if next_stop_indx != len(self.stops):
-            return self.stops[next_stop_indx]
 
     def speed_to_stop(self, next_stop):
         return self.track_repository.speedlimit_to_next_stop(next_stop)

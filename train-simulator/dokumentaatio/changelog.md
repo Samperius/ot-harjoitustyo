@@ -11,3 +11,9 @@
 - Simulaation alustava visualisointi toteutettu pygamen päälle. Tätä varten luotu Level-luokka ja tarvittavat spritet.
 - Mahdollistettu useamman junan simulointi yhtäaikaa, jota varten toteutettu generate_train()-funktio.
 - Lisätty track_test-kattavuutta sekä lisätty train_test.py Train-luokan testausta varten.
+
+## Viikko 5
+- sqlite3 tietokanta, sen alustus ja sieltä tiedon haku toteutettu
+- mahdollistettu toiminta usealla rataosuudella
+- luotu config-tiedosto tiedostojen nimille kovakoodaamisen sijasta
+- aloitettu käyttöliittymän menu-window luominen (ei vielä näy käyttäjälle)

@@ -7,18 +7,18 @@ class Train(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface([user_interface.cell_size, user_interface.cell_size])
         self.image.fill(pygame.Color(255, 0, 0, 255))
-        self.env = env
         self.name = name
+        self.env = env
         self.process = env.process(self.driving(bottleneck, track))
-        #env.process(self.reaching_bottleneck())
         self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
         self.track = track
         self.rect.x = track.start_xy[0]-1
         self.rect.y = track.start_xy[1]-1
         self.user_interface = user_interface
-        self.last_stop = False
+        #self.last_stop = False
     def driving(self, bottleneck, track):
+        last_stop = False
         while True:
             distance_to_stop = track.distance_to_stop(self.next_stop)
             speed = track.speed_to_stop(self.next_stop)
@@ -48,13 +48,13 @@ class Train(pygame.sprite.Sprite):
                             f"{self.name}: time {self.env.now:.1f}h - time for you to continue, "
                             f"time to destination {time_to_stop:.1f}")
             print(f"{self.name}: time {self.env.now:.1f}h - {self.next_stop} reached")
-            if self.last_stop:
+            if last_stop:
                 print(f"{self.name}: trip complete")
                 break
-            else:
+            if not last_stop:
                 self.next_stop = track.next_stop(self.next_stop)
                 if self.next_stop == self.track.dest:
-                    self.last_stop = True
+                    last_stop = True
 
     def reaching_bottleneck(self):
         while True:
@@ -65,15 +65,6 @@ class Train(pygame.sprite.Sprite):
                 self.process.interrupt()
                 time_to_bottleneck = 0
             break
-
-    def is_bottleneck_near(self):
-        for bottleneck in self.track.bottlenecks:
-            b_coordinates = self.track.track_repository.bottleneck_xy_coordinates(bottleneck)
-            current_coordinates = self.rect.x
-            return
-
-
-
 
     def move_train(self, time_to_stop, one_km):
         direction = self.next_stop.split('-')[1]

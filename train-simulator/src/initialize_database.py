@@ -1,6 +1,8 @@
-from src.database_connection import get_database_connection
-import os
 import pandas as pd
+from database_connection import get_database_connection
+from config import TRACK_INFO_PATH, STOP_COORDINATE_PATH, BOTTLENECKS_PATH
+
+
 def drop_tables(connection):
     cursor = connection.cursor()
 
@@ -20,7 +22,7 @@ def drop_tables(connection):
 
 def create_tables(connection):
     cursor = connection.cursor()
-
+    #track:
     cursor.execute('''
         create table track (
             start text primary key,
@@ -29,9 +31,7 @@ def create_tables(connection):
             speedlimit integer
         );
     ''')
-    dirname = os.path.dirname("/home/samuli/School/OT/ot-harjoitustyo/train-simulator/")
-    pathtocsv = os.path.join(dirname, "data", "track.csv")
-    track = pd.read_csv(pathtocsv)  # load to DataFrame
+    track = pd.read_csv(TRACK_INFO_PATH)  # load to DataFrame
     track.to_sql('track', connection, if_exists='append', index=False)  # write to sqlite table
     #stop coordinates:
     cursor.execute('''
@@ -41,9 +41,8 @@ def create_tables(connection):
             x integer
         );
     ''')
-    pathtocsv = os.path.join(dirname, "data", "stop_coordinates.csv")
-    stop_coordinates = pd.read_csv(pathtocsv)  # load to DataFrame
-    stop_coordinates.to_sql('stop_coordinates', connection, if_exists='append', index=False)  # write to sqlite table
+    stop_coordinates = pd.read_csv(STOP_COORDINATE_PATH)
+    stop_coordinates.to_sql('stop_coordinates', connection, if_exists='append', index=False)
     #bottleneck:
     cursor.execute('''
         create table bottlenecks (
@@ -53,9 +52,8 @@ def create_tables(connection):
             x integer
         );
     ''')
-    pathtocsv = os.path.join(dirname, "data", "bottlenecks.csv")
-    bottlenecks = pd.read_csv(pathtocsv)  # load to DataFrame
-    bottlenecks.to_sql('bottlenecks', connection, if_exists='append', index=False)  # write to sqlite table
+    bottlenecks = pd.read_csv(BOTTLENECKS_PATH)
+    bottlenecks.to_sql('bottlenecks', connection, if_exists='append', index=False)
 def initialize_database():
     connection = get_database_connection()
 

@@ -5,13 +5,12 @@ from repositories.track_repository import TrackRepository
 class TestTrack(unittest.TestCase):
     def setUp(self):
         track_repo = TrackRepository()
-        # Dummy data to the first test's development. later stops etc. are imported from a database
         stops = ["Helsinki", "Pasila", "Tikkurila", "Hämeenlinna",
-                 "Tampere"]  # this data should be imported from database - to be modified later
+                 "Tampere"]
         speed_limit = {"Pasila": 60, "Tikkurila": 70, "Hämeenlinna": 120,
-                       "Tampere": 100}  # this data should be imported from database - to be modified later
+                       "Tampere": 100}
         distances = {"Pasila": 5, "Tikkurila": 15, "Hämeenlinna": 100,
-                     "Tampere": 100}  # this data should be imported from database - to be modified later
+                     "Tampere": 100}
 
         self.track = Track("Helsinki", "Tampere", stops,
                            speed_limit, distances, track_repo)

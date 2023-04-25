@@ -5,22 +5,22 @@ class TrackRepository:
     def station_xy_coordinates(self, stop):
         cursor = self._connection.cursor()
         cursor.execute(f"select x from stop_coordinates where stop='{stop}'")
-        x = cursor.fetchone()[0]
+        x_coordinate = cursor.fetchone()[0]
         cursor.execute(f"select y from stop_coordinates where stop='{stop}'")
-        y = cursor.fetchone()[0]
-        return (x,y)
+        y_coordinate = cursor.fetchone()[0]
+        return (x_coordinate,y_coordinate)
 
     def bottleneck_xy_coordinates(self, bottleneck):
         cursor = self._connection.cursor()
         cursor.execute(f"select x from bottlenecks where bottleneck='{bottleneck}'")
-        x = cursor.fetchone()[0]
+        x_coordinate = cursor.fetchone()[0]
         cursor.execute(f"select y from bottlenecks where bottleneck='{bottleneck}'")
-        y = cursor.fetchone()[0]
-        return (x,y)
+        y_coordinate = cursor.fetchone()[0]
+        return (x_coordinate,y_coordinate)
 
     def return_all_start_stops(self):
         cursor = self._connection.cursor()
-        cursor.execute(f"select start from track")
+        cursor.execute("select start from track")
         start = cursor.fetchall()
         stops = []
         for stop in start:
@@ -29,7 +29,7 @@ class TrackRepository:
 
     def return_all_bottlenecks(self):
         cursor = self._connection.cursor()
-        cursor.execute(f"select bottleneck from bottlenecks")
+        cursor.execute("select bottleneck from bottlenecks")
         bottlenecks = cursor.fetchall()
         bottlenecks_list = []
         for bottleneck in bottlenecks:
@@ -48,7 +48,7 @@ class TrackRepository:
         try:
             element = cursor.fetchone()[0]
         except TypeError:
-            return
+            pass
         return element
 
     def speedlimit_to_next_stop(self, dest):
