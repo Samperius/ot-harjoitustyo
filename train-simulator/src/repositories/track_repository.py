@@ -10,6 +10,13 @@ class TrackRepository:
         y_coordinate = cursor.fetchone()[0]
         return (x_coordinate,y_coordinate)
 
+    def stop_type(self, stop):
+        cursor = self._connection.cursor()
+        print(f"select type from stop_coordinates where stop='{stop}'")
+        cursor.execute(f"select type from stop_coordinates where stop='{stop}'")
+        stop_type = cursor.fetchone()[0]
+        return stop_type
+
     def bottleneck_xy_coordinates(self, bottleneck):
         cursor = self._connection.cursor()
         cursor.execute(f"select x from bottlenecks where bottleneck='{bottleneck}'")
@@ -29,7 +36,7 @@ class TrackRepository:
 
     def return_all_bottlenecks(self):
         cursor = self._connection.cursor()
-        cursor.execute("select bottleneck from bottlenecks")
+        cursor.execute("select stop from stop_coordinates where type='bottleneck'")
         bottlenecks = cursor.fetchall()
         bottlenecks_list = []
         for bottleneck in bottlenecks:

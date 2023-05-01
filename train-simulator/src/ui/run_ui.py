@@ -41,7 +41,7 @@ def initialize_map():
         MAP[stop_coordinate[1]-1, stop_coordinate[0]-1] = 2
 
     for bottleneck in bottlenecks:
-        bottleneck_coordinate = track_repository.bottleneck_xy_coordinates(bottleneck)
+        bottleneck_coordinate = track_repository.station_xy_coordinates(bottleneck)
         MAP[bottleneck_coordinate[1] - 1, bottleneck_coordinate[0] - 1] = 3
     return MAP
 

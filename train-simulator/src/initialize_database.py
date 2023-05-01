@@ -38,22 +38,13 @@ def create_tables(connection):
         create table stop_coordinates (
             stop text primary key,
             y integer,
-            x integer
+            x integer,
+            type text
         );
     ''')
     stop_coordinates = pd.read_csv(STOP_COORDINATE_PATH)
     stop_coordinates.to_sql('stop_coordinates', connection, if_exists='append', index=False)
-    #bottleneck:
-    cursor.execute('''
-        create table bottlenecks (
-            bottleneck text primary key,
-            capacity integer,
-            y integer,
-            x integer
-        );
-    ''')
-    bottlenecks = pd.read_csv(BOTTLENECKS_PATH)
-    bottlenecks.to_sql('bottlenecks', connection, if_exists='append', index=False)
+
 def initialize_database():
     connection = get_database_connection()
 

@@ -5,7 +5,7 @@ class Track:
         self.start_xy = track_repository.station_xy_coordinates(start)
         self.start = start
         self.dest = dest
-        self.bottlenecks = track_repository.return_all_bottlenecks()
+        #self.bottlenecks =
 
     def next_stop(self, current_stop):
         return self.track_repository.next_stop(current_stop)
