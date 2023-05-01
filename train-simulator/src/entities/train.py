@@ -3,11 +3,11 @@ import pygame
 
 
 class Train(pygame.sprite.Sprite):
-    def __init__(self, env, name, bottleneck, track, user_interface):
+    def __init__(self, env, train_number, bottleneck, track, user_interface):
         super().__init__()
         self.image = pygame.Surface([user_interface.cell_size, user_interface.cell_size])
         self.image.fill(pygame.Color(255, 0, 0, 255))
-        self.name = name
+        self.name = "Train " + track.start + " - " + track.dest + " - " + train_number
         self.env = env
         self.process = env.process(self.driving(bottleneck, track))
         self.next_stop = track.next_stop(track.start)
@@ -20,6 +20,7 @@ class Train(pygame.sprite.Sprite):
     def driving(self, bottleneck, track):
         last_stop = False
         next_bottleneck = False
+        waiting_time = 0
         while True:
             distance_to_stop = track.distance_to_stop(self.next_stop)
             speed = track.speed_to_stop(self.next_stop)
@@ -30,31 +31,24 @@ class Train(pygame.sprite.Sprite):
                 f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km"
                 f"  to {self.next_stop} with {speed} km/h")
             while time_to_stop:
-                try:
-                    if time_to_stop > one_km:
-                        yield self.env.timeout(one_km)
-                        self.move_train(time_to_stop, one_km)
-                        time_to_stop = time_to_stop - one_km
-                    else:
-                        yield self.env.timeout(time_to_stop)
-                        self.move_train(time_to_stop, one_km)
-                        time_to_stop = 0
+                if time_to_stop > one_km:
+                    yield self.env.timeout(one_km)
+                    self.move_train(time_to_stop, one_km)
+                    time_to_stop = time_to_stop - one_km
+                else:
+                    yield self.env.timeout(time_to_stop)
+                    self.move_train(time_to_stop, one_km)
+                    time_to_stop = 0
 
-                except simpy.Interrupt:
-                    time_to_stop = time_to_stop - (self.env.now - start)
-                    with bottleneck.request() as req:
-                        yield req
-                        yield self.env.timeout(0.3)
-                        print(
-                            f"{self.name}: time {self.env.now:.1f}h - time for you to continue, "
-                            f"time to destination {time_to_stop:.1f}")
             print(f"{self.name}: time {self.env.now:.1f}h - {self.next_stop} reached")
             if next_bottleneck:
                 with bottleneck.request() as req:
                     yield req
+                    yield self.env.timeout(0.05)
+                    waiting_time += 0.05
                     print(
-                        f"{self.name}: time {self.env.now:.1f}h - time for you to continue")
-                    yield self.env.timeout(0.3)
+                        f"{self.name}: time {self.env.now:.1f}h - bottleneck passed")
+                    next_bottleneck = False
 
             if last_stop:
                 print(f"{self.name}: trip complete")

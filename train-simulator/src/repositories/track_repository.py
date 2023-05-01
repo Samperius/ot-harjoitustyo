@@ -12,7 +12,6 @@ class TrackRepository:
 
     def stop_type(self, stop):
         cursor = self._connection.cursor()
-        print(f"select type from stop_coordinates where stop='{stop}'")
         cursor.execute(f"select type from stop_coordinates where stop='{stop}'")
         stop_type = cursor.fetchone()[0]
         return stop_type

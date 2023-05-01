@@ -18,7 +18,7 @@ MAP[height//2,0] = 2
 MAP[height//2,width-1] = 2
 MAP[height//2,width//2] = 2
 MAP[height//2,width//3] = 3
-CELL_SIZE = 5
+CELL_SIZE = 3
 
 
 def initialize_map():

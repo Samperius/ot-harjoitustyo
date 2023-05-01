@@ -8,7 +8,7 @@ from entities.train import Train
 def generate_trains(user_interface, env, n_trains, bottleneck, track):
     trains = []
     for i in range(n_trains):
-        train = Train(env, f"Train {i+1}", bottleneck, track, user_interface)
+        train = Train(env, f"{i+1}", bottleneck, track, user_interface)
         user_interface.draw_train(train)
         trains.append(train)
 
