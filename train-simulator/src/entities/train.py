@@ -16,7 +16,7 @@ class Train(pygame.sprite.Sprite):
         self.rect.x = track.start_xy[0]-1
         self.rect.y = track.start_xy[1]-1
         self.user_interface = user_interface
-        #self.last_stop = False
+
     def driving(self, bottleneck, track):
         last_stop = False
         while True:

@@ -1,12 +1,10 @@
 import os
-from ui.ui import Ui
-from ui.run_ui import run_ui
-
+import ui.testmenu
 
 
 def main():
     print(os.getcwd())
-    run_ui(Ui)
+    ui.testmenu.main()
 
 
 if __name__ == "__main__":
