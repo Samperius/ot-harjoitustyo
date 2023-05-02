@@ -1,11 +1,13 @@
 import unittest
+import simpy
+import numpy as np
+import pygame
+
 from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
-import simpy
 from ui.ui import Ui
-import numpy as np
-import pygame
+
 
 width = 200
 height = 50
@@ -23,7 +25,6 @@ DEFAULT_IMAGE_SIZE = np.array((CELL_SIZE, CELL_SIZE))
 
 class TestTrack(unittest.TestCase):
     def setUp(self):
-        # Dummy data to the first test's development. later stops etc. are imported from a database
         stops = ["Helsinki", "Pasila", "Tikkurila", "Hämeenlinna",
                  "Tampere"]  # this data should be imported from database - to be modified later
         speed_limit = {"Pasila": 60, "Tikkurila": 70, "Hämeenlinna": 120,
@@ -47,6 +48,7 @@ class TestTrack(unittest.TestCase):
         self.train.move_train(11,0)
         after_move = self.train.rect.x
         self.assertEqual(before_move + 11, after_move)
+        print("done")
 
     def test_move_y_train(self):
         before_move = self.train.rect.x
