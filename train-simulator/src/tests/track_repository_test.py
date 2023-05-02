@@ -8,7 +8,6 @@ from initialize_database import create_tables, initialize_database
 
 class TestTrackRepo(unittest.TestCase):
     def setUp(self):
-        create_tables()
         initialize_database()
         connection = get_database_connection()
         self.track_repository = TrackRepository(connection)
