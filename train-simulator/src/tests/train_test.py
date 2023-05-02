@@ -6,6 +6,7 @@ import pygame
 from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
+from database_connection import get_database_connection
 from ui.ui import Ui
 
 
@@ -25,20 +26,14 @@ DEFAULT_IMAGE_SIZE = np.array((CELL_SIZE, CELL_SIZE))
 
 class TestTrack(unittest.TestCase):
     def setUp(self):
-        stops = ["Helsinki", "Pasila", "Tikkurila", "Hämeenlinna",
-                 "Tampere"]  # this data should be imported from database - to be modified later
-        speed_limit = {"Pasila": 60, "Tikkurila": 70, "Hämeenlinna": 120,
-                       "Tampere": 100}  # this data should be imported from database - to be modified later
-        distances = {"Pasila": 5, "Tikkurila": 15, "Hämeenlinna": 100,
-                     "Tampere": 100}  # this data should be imported from database - to be modified later
-
         display_height = height * CELL_SIZE
         display_width = width * CELL_SIZE
         display = pygame.display.set_mode((display_width, display_height))
         ui = Ui(MAP, CELL_SIZE, display)
-        track_repo = TrackRepository()
-        self.track = Track("Helsinki", "Tampere", stops,
-                           speed_limit, distances, track_repo)
+        connection = get_database_connection()
+        track_repository = TrackRepository(connection)
+
+        self.track = Track("Helsinki", "Tampere", track_repository)
         env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
         bottleneck = simpy.PreemptiveResource(env, capacity=1)
         self.train = Train(env, "Train", bottleneck, self.track, ui)
@@ -46,6 +41,7 @@ class TestTrack(unittest.TestCase):
     def test_move_x_train(self):
         before_move = self.train.rect.x
         self.train.move_train(11,0)
+        print(self.train.move_train(11,0))
         after_move = self.train.rect.x
         self.assertEqual(before_move + 11, after_move)
         print("done")
@@ -55,3 +51,5 @@ class TestTrack(unittest.TestCase):
         self.train.move_train(11,0)
         after_move = self.train.rect.x
         self.assertEqual(before_move + 11, after_move)
+
+       # def move_train(self, time_to_stop, one_km):

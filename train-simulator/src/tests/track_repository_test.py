@@ -29,3 +29,4 @@ class TestTrackRepo(unittest.TestCase):
 
     def test_speedlimit_to_next_stop(self):
         self.assertEqual(self.track_repository.speedlimit_to_next_stop("Hämeenlinna-P"), 120)
+
