@@ -15,8 +15,7 @@ class TestInitializeDatabase(unittest.TestCase):
         try:
             element = cursor.fetchone()[0]
         except TypeError:
-            return None
-        return element
+            element = None
         self.assertEqual(element, 'Pasila-P')
 
     def test_check_track_db_last_stop(self):
@@ -25,8 +24,7 @@ class TestInitializeDatabase(unittest.TestCase):
         try:
             element = cursor.fetchone()[0]
         except TypeError:
-            return None
-        return element
+            element = None
         self.assertEqual(element, None)
 
     def test_check_coordinate_db(self):
@@ -35,8 +33,7 @@ class TestInitializeDatabase(unittest.TestCase):
         try:
             element = cursor.fetchone()[0]
         except TypeError:
-            return None
-        return element
+            element = None
         self.assertEqual(element, 'Pasila-P')
 
     def test_drop_tables(self):
@@ -49,6 +46,5 @@ class TestInitializeDatabase(unittest.TestCase):
         except:
             element = None
             pass
-        return element
-
+        self._connection = initialize_database()
         self.assertEqual(element, None)
