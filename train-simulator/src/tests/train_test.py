@@ -33,7 +33,7 @@ class TestTrack(unittest.TestCase):
         connection = get_database_connection()
         track_repository = TrackRepository(connection)
 
-        self.track = Track("Helsinki", "Tampere", track_repository)
+        self.track = Track("Helsinki-P", "Tampere-P", track_repository)
         env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
         bottleneck = simpy.PreemptiveResource(env, capacity=1)
         self.train = Train(env, "Train", bottleneck, self.track, ui)
