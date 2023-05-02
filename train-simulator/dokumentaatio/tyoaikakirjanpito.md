@@ -3,7 +3,7 @@
 - viikko 3: 10h
 - viikko 4: 15h
 - viikko 5: 17h
-- viikko 6:
+- viikko 6: 14h
 - viikko 7:
 
-Yhteensä: 44h
+Yhteensä: 58h

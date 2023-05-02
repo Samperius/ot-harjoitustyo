@@ -23,7 +23,7 @@ menu = pygame_menu.Menu(
     width=1200
 )
 selected = 0
-n_trains = menu.add.range_slider(default=1, title='Number of trains', increment=1, range_values= (1,10),value_format=lambda x: str(int(x)))
+n_trains = menu.add.range_slider(default=1, title='Number of trains', increment=1, range_values= (1,5),value_format=lambda x: str(int(x)))
 menu.add.button('Play', start_the_simulation)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 

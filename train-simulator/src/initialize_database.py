@@ -1,6 +1,6 @@
 import pandas as pd
 from database_connection import get_database_connection
-from config import TRACK_INFO_PATH, STOP_COORDINATE_PATH, BOTTLENECKS_PATH
+from config import TRACK_INFO_PATH, STOP_COORDINATE_PATH
 
 
 def drop_tables(connection):

@@ -1,4 +1,3 @@
-import simpy
 import pygame
 
 
@@ -26,7 +25,6 @@ class Train(pygame.sprite.Sprite):
             speed = track.speed_to_stop(self.next_stop)
             time_to_stop = distance_to_stop / speed
             one_km = 1/speed
-            start = self.env.now
             print(
                 f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km"
                 f"  to {self.next_stop} with {speed} km/h")

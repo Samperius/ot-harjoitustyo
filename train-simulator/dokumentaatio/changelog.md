@@ -17,3 +17,7 @@
 - mahdollistettu toiminta usealla rataosuudella
 - luotu config-tiedosto tiedostojen nimille kovakoodaamisen sijasta
 - aloitettu käyttöliittymän menu-window luominen (ei vielä näy käyttäjälle)
+
+## Viikko 6
+- Luotu pygame_menu -pohjainen valikko simulaation käynnistykseen ja parametrointiin
+- Luotu käyttäjälle mahdollisuus säätää simuloitavien junien määrää

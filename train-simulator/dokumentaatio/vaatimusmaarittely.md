@@ -23,7 +23,7 @@ Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali kä
 	- Juna kulkee pysäkiltä toiselle kunnes saavuttaa määränpäänsä - **tehty**
 	- Useampien junien simulointi on mahdollista - **tehty**
 - Ohjelma simuloi annetulle aikavälille liikenteen:
-	- Käyttäjä pystyy muuttamaan liikennemääriä suhteessa base-skanaarioon
+	- Käyttäjä pystyy muuttamaan liikennemääriä suhteessa base-skanaarioon **osin tehty**
 	- Käyttäjä pystyy muuttamaan logiikkaa, jolla junat ohittavat pullonkaulakohdat:
 		- esim. First In First Out (FIFO) tai First In Last Out (LIFO)
 - Ohjelma laskee simulaatioiden pohjalta:
@@ -31,7 +31,7 @@ Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali kä
 
 ## Käyttöliittymä:
 - Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä. - Yksinkertaistetun käyttöliittymän v.1.0 **tehty**
-- Käyttöliittymässä parametrien muuttaminen on mahdollista
+- Käyttöliittymässä parametrien muuttaminen on mahdollista **osin tehty**
 
 ## Jatkokehitysideoita
 - Ohjelma voisi hakea simulaation pohjaksi perustiedot junaliikenteestä digitraffic.fi sivulta hyödyntäen avoimen datan GraphQL-rajapintaa
