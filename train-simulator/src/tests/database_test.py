@@ -35,7 +35,7 @@ class TestInitializeDatabase(unittest.TestCase):
         except TypeError:
             element = None
         self.assertEqual(element, 'Pasila-P')
-"""
+
     def test_drop_tables(self):
         cursor = self._connection.cursor()
         drop_tables(self._connection)
@@ -46,5 +46,5 @@ class TestInitializeDatabase(unittest.TestCase):
         except:
             element = None
             pass
-        self._connection = initialize_database()
-        self.assertEqual(element, None)"""
+        initialize_database()
+        self.assertEqual(element, None)
