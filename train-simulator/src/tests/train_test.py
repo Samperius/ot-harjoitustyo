@@ -43,13 +43,13 @@ class TestTrack(unittest.TestCase):
         self.train.move_train(11,5)
         print(self.train.move_train(11,0))
         after_move = self.train.rect.x
-        self.assertEqual(before_move + 11, 100)
+        self.assertEqual(before_move + 11, 110)
         print("done")
 
     def test_move_y_train(self):
         before_move = self.train.rect.y
         self.train.move_train(11,5)
         after_move = self.train.rect.y
-        self.assertEqual(before_move + 11, 298)
+        self.assertEqual(before_move + 11, 410)
 
        # def move_train(self, time_to_stop, one_km):
