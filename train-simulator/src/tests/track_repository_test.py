@@ -1,11 +1,10 @@
-
 import unittest
 from entities.track import Track
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 
 
-class TestTrack(unittest.TestCase):
+class TestTrackRepo(unittest.TestCase):
     def setUp(self):
         connection = get_database_connection()
         self.track_repository = TrackRepository(connection)

@@ -26,3 +26,4 @@ class TestTrack(unittest.TestCase):
 
     def test_next_stop_for_last_stop(self):
         self.assertEqual(self.track.next_stop("Jyväskylä-P"), None)
+
