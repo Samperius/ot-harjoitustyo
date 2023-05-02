@@ -34,7 +34,7 @@ class TestInitializeDatabase(unittest.TestCase):
             element = cursor.fetchone()[0]
         except TypeError:
             element = None
-        self.assertEqual(element, 'Pasila-P')
+        self.assertEqual(element, 'station')
 
     def test_drop_tables(self):
         cursor = self._connection.cursor()
