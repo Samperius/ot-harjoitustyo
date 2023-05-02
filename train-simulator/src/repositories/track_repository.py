@@ -16,13 +16,7 @@ class TrackRepository:
         stop_type = cursor.fetchone()[0]
         return stop_type
 
-    def bottleneck_xy_coordinates(self, bottleneck):
-        cursor = self._connection.cursor()
-        cursor.execute(f"select x from bottlenecks where bottleneck='{bottleneck}'")
-        x_coordinate = cursor.fetchone()[0]
-        cursor.execute(f"select y from bottlenecks where bottleneck='{bottleneck}'")
-        y_coordinate = cursor.fetchone()[0]
-        return (x_coordinate,y_coordinate)
+
 
     def return_all_start_stops(self):
         cursor = self._connection.cursor()
@@ -54,7 +48,7 @@ class TrackRepository:
         try:
             element = cursor.fetchone()[0]
         except TypeError:
-            pass
+            return None
         return element
 
     def speedlimit_to_next_stop(self, dest):
