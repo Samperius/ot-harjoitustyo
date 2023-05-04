@@ -21,3 +21,13 @@
 ## Viikko 6
 - Luotu pygame_menu -pohjainen valikko simulaation käynnistykseen ja parametrointiin
 - Luotu käyttäjälle mahdollisuus säätää simuloitavien junien määrää
+
+## Viikko 7
+- korjattu ohjelman jäätymisbugi muuttamalla gameloop-rakenne sekä lisäämällä säännöllinen even.pump() simulaattooriin
+- Mahdollisuus simuloida ilman visualisointia
+- Train luokan printtauksen hallinta
+Vielä To-Do:
+- useamman simuloinnin suorittaminen peräjälkeen
+- simulaatiofunktioiden korvaaminen luokkarakenteella
+- junien simuloiminen satunnaisesti eri reiteille
+

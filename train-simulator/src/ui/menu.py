@@ -27,5 +27,5 @@ n_trains = menu.add.range_slider(default=1, title='Number of trains', increment=
 menu.add.button('Play', start_the_simulation)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
-def main():
+def mainmenu():
     menu.mainloop(surface)

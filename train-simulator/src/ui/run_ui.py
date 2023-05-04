@@ -47,7 +47,6 @@ def initialize_map():
     return MAP
 
 
-
 def run_simulation_window(n_trains):
     MAP = initialize_map()
     display_height = height * CELL_SIZE
@@ -59,16 +58,15 @@ def run_simulation_window(n_trains):
 
     #user_interface.all_sprites.draw(display)
     #pygame.display.update()
-    simulate(user_interface, n_trains)
+
     #user_interface.all_sprites.draw(display)
     clock = Clock()
     renderer = Renderer(display, user_interface)
     event_queue = EventQueue()
-    game_loop = GameLoop(user_interface, renderer, event_queue, clock, CELL_SIZE)
+    game_loop = GameLoop(user_interface, renderer, event_queue, clock,n_trains, CELL_SIZE)
     pygame.init()
+    simulate(user_interface, n_trains, game_loop)
     game_loop.start()
-
-
 
 """    running = True
 

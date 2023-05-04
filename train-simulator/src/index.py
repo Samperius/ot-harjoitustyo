@@ -4,7 +4,7 @@ import ui.menu
 
 def main():
     print(os.getcwd())
-    ui.menu.main()
+    ui.menu.mainmenu()
 
 
 if __name__ == "__main__":
