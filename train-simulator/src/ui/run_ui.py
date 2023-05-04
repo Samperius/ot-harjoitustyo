@@ -6,6 +6,7 @@ from simulator.simulate import simulate
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from ui.ui import Ui
+from ui.game_loop import GameLoop, EventQueue, Renderer, Clock
 
 
 
@@ -56,14 +57,20 @@ def run_simulation_window(n_trains):
 
     user_interface = Ui(MAP, CELL_SIZE, display)
 
-    pygame.init()
-    user_interface.all_sprites.draw(display)
-    pygame.display.update()
+    #user_interface.all_sprites.draw(display)
+    #pygame.display.update()
     simulate(user_interface, n_trains)
-    user_interface.all_sprites.draw(display)
+    #user_interface.all_sprites.draw(display)
+    clock = Clock()
+    renderer = Renderer(display, user_interface)
+    event_queue = EventQueue()
+    game_loop = GameLoop(user_interface, renderer, event_queue, clock, CELL_SIZE)
+    pygame.init()
+    game_loop.start()
 
 
-    running = True
+
+"""    running = True
 
     while running:
         for event in pygame.event.get():
@@ -71,5 +78,5 @@ def run_simulation_window(n_trains):
                 running = False
 
         pygame.display.update()
+"""
 
-    pygame.quit()

@@ -29,6 +29,7 @@ class Train(pygame.sprite.Sprite):
                 f"{self.name}: time {self.env.now:.1f}h -  starting to drive {distance_to_stop} km"
                 f"  to {self.next_stop} with {speed} km/h")
             while time_to_stop:
+                pygame.event.pump()
                 if time_to_stop > one_km:
                     yield self.env.timeout(one_km)
                     self.move_train(time_to_stop, one_km)
