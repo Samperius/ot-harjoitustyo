@@ -8,7 +8,7 @@ class Train(pygame.sprite.Sprite):
         self.image.fill(pygame.Color(255, 0, 0, 255))
         self.name = "Train " + track.start + " - " + track.dest + " - " + train_number
         self.env = env
-        self.process = env.process(self.driving(bottleneck, track))
+        self.bottleneck = bottleneck
         self.next_stop = track.next_stop(track.start)
         self.rect = self.image.get_rect()
         self.track = track
@@ -17,6 +17,11 @@ class Train(pygame.sprite.Sprite):
         self.user_interface = user_interface
         self.game_loop = game_loop
         self.draw_or_not = draw_or_not
+        self.waiting_time = 0
+
+    def start(self):
+        self.process = self.env.process(self.driving(self.bottleneck, self.track))
+        return
 
     def driving(self, bottleneck, track):
         last_stop = False
@@ -43,14 +48,16 @@ class Train(pygame.sprite.Sprite):
             self.user_message('station_reached', True)
             if next_bottleneck:
                 with bottleneck.request() as req:
+                    waiting_started = self.env.now
                     yield req
-                    yield self.env.timeout(0.05)
-                    waiting_time += 0.05
+                    yield self.env.timeout(0.1)
+                    self.waiting_time += self.env.now - waiting_started
                     self.user_message('bottleneck_passed', True)
                     next_bottleneck = False
 
             if last_stop:
                 self.user_message('trip_complete', True)
+                print(self.waiting_time)
                 break
             if not last_stop:
                 self.next_stop = track.next_stop(self.next_stop)
@@ -59,15 +66,6 @@ class Train(pygame.sprite.Sprite):
                 if self.track.track_repository.stop_type(self.next_stop) == 'bottleneck':
                     next_bottleneck = True
 
-    def reaching_bottleneck(self):
-        while True:
-            time_to_bottleneck = 1
-            while time_to_bottleneck:
-                yield self.env.timeout(time_to_bottleneck)
-                print(f"{self.name}: time {self.env.now:.1f}h - bottleneck reached")
-                self.process.interrupt()
-                time_to_bottleneck = 0
-            break
 
     def user_message(self, command, print_or_not):
         if print_or_not:

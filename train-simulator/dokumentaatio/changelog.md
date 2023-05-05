@@ -26,8 +26,12 @@
 - korjattu ohjelman jäätymisbugi muuttamalla gameloop-rakenne sekä lisäämällä säännöllinen even.pump() simulaattooriin
 - Mahdollisuus simuloida ilman visualisointia
 - Train luokan printtauksen hallinta
-Vielä To-Do:
 - useamman simuloinnin suorittaminen peräjälkeen
 - simulaatiofunktioiden korvaaminen luokkarakenteella
+- valikkoruutu palaa simulaation loputtua
+
+Vielä To-Do:
+- tulokset ruudulle simulaation jälkeen
 - junien simuloiminen satunnaisesti eri reiteille
+- Rata kulkee poikittin mahdollisimman isona (pikselikoko säädettävissä konffissaa)
 

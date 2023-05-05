@@ -1,13 +1,10 @@
 import numpy as np
 import pygame
-import pygame_menu
-from pygame_menu import themes
-from simulator.simulate import simulate
+from simulator.simulate import Simulation
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from ui.ui import Ui
 from ui.game_loop import GameLoop, EventQueue, Renderer, Clock
-
 
 
 width = 200
@@ -46,35 +43,38 @@ def initialize_map():
         MAP[bottleneck_coordinate[1] - 1, bottleneck_coordinate[0] - 1] = 3
     return MAP
 
-
-def run_simulation_window(n_trains):
+def run_many_simulations(n_trains, n_simulations):
     MAP = initialize_map()
     display_height = height * CELL_SIZE
     display_width = width * CELL_SIZE
     display = pygame.display.set_mode((display_width, display_height))
     pygame.display.set_caption("Train simulator")
-
     user_interface = Ui(MAP, CELL_SIZE, display)
-
-    #user_interface.all_sprites.draw(display)
-    #pygame.display.update()
-
-    #user_interface.all_sprites.draw(display)
     clock = Clock()
     renderer = Renderer(display, user_interface)
     event_queue = EventQueue()
-    game_loop = GameLoop(user_interface, renderer, event_queue, clock,n_trains, CELL_SIZE)
+    game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
     pygame.init()
-    simulate(user_interface, n_trains, game_loop)
+    simulation = Simulation(user_interface, n_trains, game_loop)
+    result = simulation.simulate_many(n_simulations)
+    game_loop.start()
+    return result
+
+
+def animate_single_simulations(n_trains):
+    MAP = initialize_map()
+    display_height = height * CELL_SIZE
+    display_width = width * CELL_SIZE
+    display = pygame.display.set_mode((display_width, display_height))
+    pygame.display.set_caption("Train simulator")
+    user_interface = Ui(MAP, CELL_SIZE, display)
+    clock = Clock()
+    renderer = Renderer(display, user_interface)
+    event_queue = EventQueue()
+    game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
+    pygame.init()
+    simulation = Simulation(user_interface, n_trains, game_loop)
+    simulation.simulate_animated()
     game_loop.start()
 
-"""    running = True
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        pygame.display.update()
-"""
 

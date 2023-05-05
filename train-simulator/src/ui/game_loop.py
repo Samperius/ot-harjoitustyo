@@ -1,5 +1,4 @@
 import pygame
-from simulator.simulate import simulate
 
 class Clock:
     def __init__(self):
@@ -26,16 +25,15 @@ class Renderer:
         pygame.display.update()
 
 class GameLoop:
-    def __init__(self, user_interface, renderer, event_queue, clock, n_trains, cell_size):
-        self._user_interface = user_interface
+    def __init__(self, renderer, event_queue, clock, cell_size):
         self._renderer = renderer
         self._event_queue = event_queue
         self._clock = clock
         self._cell_size = cell_size
-        self._n_trains = n_trains
+        self.running = True
 
     def start(self):
-        while True:
+        while self.running:
             if self._handle_events() == False:
                 break
 
