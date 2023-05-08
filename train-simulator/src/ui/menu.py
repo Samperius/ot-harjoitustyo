@@ -1,6 +1,7 @@
 from ui.run_ui import animate_single_simulations
 from ui.run_ui import run_many_simulations
 import pygame_menu
+import numpy as np
 from pygame_menu.examples import create_example_window
 from pygame import font
 def start_many_simulation() -> None:
@@ -10,6 +11,7 @@ def start_many_simulation() -> None:
     """
 
     result = run_many_simulations( int(n_trains.get_value()), int(n_sim.get_value()))
+    result = np.asarray(result)
     results(result)
 
 def start_animated_simulation():
@@ -18,8 +20,9 @@ def start_animated_simulation():
     here menu can be disabled, etc.
     """
     value = int(n_trains.get_value())
-    animate_single_simulations(value)
-    results()
+    result = animate_single_simulations(value)
+    result = np.asarray(result)
+    results(result)
 
 
 
@@ -56,9 +59,11 @@ def results(result):
     selected = 0
     global n_trains
     global n_sim
-    menu.add.label(f'previous simulation: Trains{}, avg. waiting time{}')
-    menu.add.label(f'resuls: {result}')
+    menu.add.label(f'Previous simulation:')
+    menu.add.label(f'Number of Trains: {n_trains.get_value()}, Number of simulations: {n_sim.get_value()}')
+    menu.add.label(f'Average waiting time per simulation: {np.mean(result):.2f}')
     menu.add.button('save results', print("saving or not :D"))
+    menu.add.label(f'')
     n_trains = menu.add.range_slider \
         (default=1, title='Number of trains', increment=1, range_values=(1, 5), value_format=lambda x: str(int(x)))
     menu.add.button('Animate single simulation', start_animated_simulation)

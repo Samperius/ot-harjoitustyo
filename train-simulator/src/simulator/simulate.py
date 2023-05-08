@@ -69,3 +69,4 @@ class Simulation:
     def simulate_animated(self):
         total_wait_time = self.simulate_once(animate=True)
         self.game_loop.running = False
+        return total_wait_time

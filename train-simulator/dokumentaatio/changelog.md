@@ -29,9 +29,10 @@
 - useamman simuloinnin suorittaminen peräjälkeen
 - simulaatiofunktioiden korvaaminen luokkarakenteella
 - valikkoruutu palaa simulaation loputtua
+- tulokset ruudulle simulaation jälkeen
 
 Vielä To-Do:
-- tulokset ruudulle simulaation jälkeen
+
 - junien simuloiminen satunnaisesti eri reiteille
-- Rata kulkee poikittin mahdollisimman isona (pikselikoko säädettävissä konffissaa)
+- Rata kulkee poikittin mahdollisimman isona (pikselikoko säädettävissä konffissa)
 

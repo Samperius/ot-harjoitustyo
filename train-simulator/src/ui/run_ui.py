@@ -74,7 +74,8 @@ def animate_single_simulations(n_trains):
     game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
     pygame.init()
     simulation = Simulation(user_interface, n_trains, game_loop)
-    simulation.simulate_animated()
+    result = simulation.simulate_animated()
     game_loop.start()
+    return result
 
 
