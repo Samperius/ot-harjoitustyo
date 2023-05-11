@@ -3,7 +3,7 @@ from ui.run_ui import run_many_simulations
 import pygame_menu
 import numpy as np
 from pygame_menu.examples import create_example_window
-from repositories.results import saving_results
+from repositories.saving import Saving
 
 def start_many_simulation():
     global n_trains
@@ -30,7 +30,7 @@ def save_results():
     data = {'number_of_simulations': [n_sim],
             'number_of_trains': [n_trains],
             'average_waiting_time': [np.mean(waiting_time)]}
-    saving = saving_results()
+    saving = Saving()
     saving.save_dataframe(data)
     print("results saved")
     mainmenu()
@@ -46,8 +46,6 @@ def mainmenu():
         title='Welcome',
         width=1200
     )
-    selected = 0
-
     n_trains = menu.add.range_slider \
         (default=1, title='Number of trains', increment=1, range_values=(1, 5), value_format=lambda x: str(int(x)))
     menu.add.button('Animate single simulation', start_animated_simulation)

@@ -1,6 +1,6 @@
 import numpy as np
 import pygame
-from simulator.simulate import Simulation
+from simulator.simulator import Simulator
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from ui.ui import Ui
@@ -55,7 +55,7 @@ def run_many_simulations(n_trains, n_simulations):
     event_queue = EventQueue()
     game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
     pygame.init()
-    simulation = Simulation(user_interface, n_trains, game_loop)
+    simulation = Simulator(user_interface, n_trains, game_loop)
     result = simulation.simulate_many(n_simulations)
     game_loop.start()
     return result
@@ -73,7 +73,7 @@ def animate_single_simulations(n_trains):
     event_queue = EventQueue()
     game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
     pygame.init()
-    simulation = Simulation(user_interface, n_trains, game_loop)
+    simulation = Simulator(user_interface, n_trains, game_loop)
     result = simulation.simulate_animated()
     game_loop.start()
     return result

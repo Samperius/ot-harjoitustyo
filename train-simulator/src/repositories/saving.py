@@ -3,7 +3,7 @@ import os
 from config import RESULTS_PATH
 
 
-class saving_results:
+class Saving:
     def __init__(self):
         self.file_path = RESULTS_PATH
         self.file_exists = os.path.isfile(RESULTS_PATH)

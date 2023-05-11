@@ -20,7 +20,7 @@ class Train(pygame.sprite.Sprite):
         self.waiting_time = 0
 
     def start(self):
-        self.process = self.env.process(self.driving(self.bottleneck, self.track))
+        self.env.process(self.driving(self.bottleneck, self.track))
         return
 
     def driving(self, bottleneck, track):

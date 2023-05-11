@@ -5,7 +5,7 @@ from database_connection import get_database_connection
 from entities.track import Track
 from entities.train import Train
 
-class Simulation:
+class Simulator:
     def __init__(self, user_interface, n_trains, game_loop):
         self.n_trains = n_trains
         connection = get_database_connection()
@@ -18,9 +18,6 @@ class Simulation:
         train.start()
         self.user_interface.draw_train(train)
         return train
-
-    def generate_random_train(self, animate):
-        track = ...
 
 
     def simulate_once(self, animate):
