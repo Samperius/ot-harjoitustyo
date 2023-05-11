@@ -22,3 +22,6 @@ STOP_COORDINATE_PATH = os.path.join(dirname, "..", "data", STOP_COORDINATE_FILEN
 
 BOTTLENECKS_FILENAME = os.getenv("BOTTLENECKS_FILENAME") or "bottlenecks.csv"
 BOTTLENECKS_PATH = os.path.join(dirname, "..", "data", BOTTLENECKS_FILENAME)
+
+RESULTS_FILENAME = os.getenv("RESULTS_FILENAME") or "results.csv"
+RESULTS_PATH = os.path.join(dirname, "..", "data", RESULTS_FILENAME)
