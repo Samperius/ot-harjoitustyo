@@ -23,6 +23,13 @@ class TestTrackRepo(unittest.TestCase):
     def test_return_all_bottlenecks(self):
         self.assertEqual(self.track_repository.return_all_bottlenecks(), ['Kapeikko1-P', 'Kapeikko1-E'])
 
+    def test_return_all_start_stops(self):
+        self.assertEqual(self.track_repository.return_all_start_stops().sort(), ['Helsinki-P', 'Pasila-P','Kapeikko1-P',
+                                                                          'Pasila-E', 'Tikkurila-E', 'Kapeikko1-E',
+                                                                          'Tikkurila-P', 'Hämeenlinna-E',
+                                                                          'Hämeenlinna-P', 'Tampere-E',
+                                                                          'Tampere-P', 'Jyväskylä-E'].sort())
+
     def test_distance_to_next_stop(self):
         self.assertEqual(self.track_repository.distance_to_next_stop("Hämeenlinna-P"), 90)
 

@@ -84,4 +84,3 @@ class TestTrack(unittest.TestCase):
         out, err = self.capsys.readouterr()
         print(out)
         self.assertEqual("trip complete" in out, True)
-        
