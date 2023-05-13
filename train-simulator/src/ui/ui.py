@@ -1,6 +1,5 @@
 import pygame
 from ui.static_sprites import StaticSprite
-import numpy as np
 
 class Ui:
     def __init__(self, MAP, CELL_SIZE, display):

@@ -2,12 +2,13 @@ import unittest
 import simpy
 import numpy as np
 import pygame
-
 from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from ui.ui import Ui
+from ui.game_loop import GameLoop, EventQueue, Renderer, Clock
+
 
 
 width = 200
@@ -19,24 +20,29 @@ MAP[height//2,0] = 2
 MAP[height//2,width-1] = 2
 MAP[height//2,width//2] = 2
 MAP[height//2,width//3] = 3
-
 CELL_SIZE = 1
 DEFAULT_IMAGE_SIZE = np.array((CELL_SIZE, CELL_SIZE))
 
 
 class TestTrack(unittest.TestCase):
     def setUp(self):
+        print('debug')
         display_height = height * CELL_SIZE
         display_width = width * CELL_SIZE
         display = pygame.display.set_mode((display_width, display_height))
         ui = Ui(MAP, CELL_SIZE, display)
         connection = get_database_connection()
         track_repository = TrackRepository(connection)
+        clock = Clock()
+        renderer = Renderer(display, user_interface)
+        event_queue = EventQueue()
+        game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
 
         self.track = Track("Helsinki-P", "Tampere-P", track_repository)
         env = simpy.rt.RealtimeEnvironment(initial_time=0, factor=1.0, strict=False)
         bottleneck = simpy.PreemptiveResource(env, capacity=1)
-        self.train = Train(env, "Train", bottleneck, self.track, ui)
+        self.train = Train(env, "Train", bottleneck, self.track, ui, game_loop, False)
+
 
     def test_move_x_train(self):
         before_move = self.train.rect.x

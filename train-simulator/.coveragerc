@@ -1,3 +1,7 @@
 [run]
 source = src
-omit = src/**/__init__.py, src/tests/**, src/ui/**, src/index.py, src/simulator/simulate.py
+omit = src/**/__init__.py, src/tests/**, src/ui/**, src/index.py, src/simulator/simulation.py
+
+[report]
+ignore_errors = True
+

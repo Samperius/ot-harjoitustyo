@@ -1,5 +1,4 @@
 import unittest
-from entities.track import Track
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from initialize_database import create_tables, initialize_database

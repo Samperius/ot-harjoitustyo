@@ -1,9 +1,9 @@
-import pygame
 import simpy
 from repositories.track_repository import TrackRepository
 from database_connection import get_database_connection
 from entities.track import Track
 from entities.train import Train
+
 
 class Simulator:
     def __init__(self, user_interface, n_trains, game_loop):
