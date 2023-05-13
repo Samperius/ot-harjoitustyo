@@ -52,5 +52,3 @@ def initialize_database():
     create_tables(connection)
     return connection
 
-if __name__ == "__main__":
-    initialize_database()
