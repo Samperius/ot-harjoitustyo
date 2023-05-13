@@ -62,8 +62,26 @@ class TestTrack(unittest.TestCase):
         self.assertEqual(before_move + 11, 410)
 
     def test_print_next_stop(self):
-        shout = self.train.user_message('next_stop', True)
+        self.train.user_message('next_stop', True)
         out, err = self.capsys.readouterr()
         print(out)
         self.assertEqual("starting to drive to" in out, True)
 
+    def test_print_station_reached(self):
+        self.train.user_message('station_reached', True)
+        out, err = self.capsys.readouterr()
+        print(out)
+        self.assertEqual("reached" in out, True)
+
+    def test_print_bottleneck_passed(self):
+        self.train.user_message('bottleneck_passed', True)
+        out, err = self.capsys.readouterr()
+        print(out)
+        self.assertEqual("bottleneck passed" in out, True)
+
+    def test_print_trip_complete(self):
+        self.train.user_message('trip_complete', True)
+        out, err = self.capsys.readouterr()
+        print(out)
+        self.assertEqual("trip complete" in out, True)
+        
