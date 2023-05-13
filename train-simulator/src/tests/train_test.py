@@ -2,7 +2,8 @@ import unittest
 import simpy
 import numpy as np
 import pygame
-import sys
+import pytest
+
 from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
@@ -11,10 +12,8 @@ from ui.ui import Ui
 from ui.game_loop import GameLoop, EventQueue, Renderer, Clock
 
 
-
 width = 200
 height = 50
-
 MAP = np.zeros((height,width))
 MAP[height//2,:] = np.ones(width)
 MAP[height//2,0] = 2
@@ -44,6 +43,9 @@ class TestTrack(unittest.TestCase):
         bottleneck = simpy.PreemptiveResource(env, capacity=1)
         self.train = Train(env, "Train", bottleneck, self.track, ui, game_loop, False)
 
+    @pytest.fixture(autouse=True)
+    def _pass_fixtures(self, capsys):
+        self.capsys = capsys
 
     def test_move_x_train(self):
         before_move = self.train.rect.x
@@ -59,8 +61,8 @@ class TestTrack(unittest.TestCase):
         after_move = self.train.rect.y
         self.assertEqual(before_move + 11, 410)
 
-    def test_print_next_stop(self, capfd):
+    def test_print_next_stop(self):
         shout = self.train.user_message('next_stop', True)
-        captured = capfd.readouterr()
+        captured = self.capsys.readouterr()
         print(captured)
 
