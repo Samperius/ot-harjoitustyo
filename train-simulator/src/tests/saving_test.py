@@ -1,14 +1,19 @@
 import unittest
+import os
 from repositories.saving import Saving
 import pandas as pd
-from config import RESULTS_PATH
+from config import dirname
+
+
+RESULTS_FILENAME = "test_results.csv"
+RESULTS_PATH = os.path.join(dirname, "..", "data", RESULTS_FILENAME)
 
 class TestTrackRepo(unittest.TestCase):
     def setUp(self):
         data = {'number_of_simulations': [1],
                 'number_of_trains': [4],
                 'average_waiting_time': [5.6]}
-        self.saving = Saving()
+        self.saving = Saving(RESULTS_PATH)
         self.saving.save_dataframe(data)
 
     def test_saving_simulations(self):

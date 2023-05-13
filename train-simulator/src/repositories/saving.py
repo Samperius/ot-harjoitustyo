@@ -4,9 +4,9 @@ from config import RESULTS_PATH
 
 
 class Saving:
-    def __init__(self):
-        self.file_path = RESULTS_PATH
-        self.file_exists = os.path.isfile(RESULTS_PATH)
+    def __init__(self, result_path = RESULTS_PATH):
+        self.file_path = result_path
+        self.file_exists = os.path.isfile(result_path)
 
     def save_dataframe(self, data):
         df = pd.DataFrame(data)
