@@ -20,14 +20,17 @@ class TestTrackRepo(unittest.TestCase):
 
 
     def test_saving_simulations(self):
+        self.saving.save_dataframe(self.data)
         simulations = self.df.iloc[-1,0]
         self.assertEqual(simulations, 1)
 
     def test_trains_trains(self):
+        self.saving.save_dataframe(self.data)
         trains = self.df.iloc[-1,1]
         self.assertEqual(trains, 4)
 
     def test_saving_waiting(self):
+        self.saving.save_dataframe(self.data)
         waiting = self.df.iloc[-1,2]
         self.assertEqual(waiting, 5.6)
 

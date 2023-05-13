@@ -6,4 +6,5 @@ __pycache__
 TrainSimulator.db
 data/TrainSimulator.db
 data/results.csv
+data/test_results.csv
 
