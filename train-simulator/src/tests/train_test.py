@@ -63,7 +63,7 @@ class TestTrack(unittest.TestCase):
 
     def test_print_next_stop(self):
         shout = self.train.user_message('next_stop', True)
-        captured = self.capsys.readouterr()
-        print(captured)
-        self.assertEqual("starting to drive to" in captured, True)
+        out, err = self.capsys.readouterr()
+        print(out)
+        self.assertEqual("starting to drive to" in out, True)
 
