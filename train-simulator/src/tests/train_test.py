@@ -34,7 +34,7 @@ class TestTrack(unittest.TestCase):
         connection = get_database_connection()
         track_repository = TrackRepository(connection)
         clock = Clock()
-        renderer = Renderer(display, user_interface)
+        renderer = Renderer(display, ui)
         event_queue = EventQueue()
         game_loop = GameLoop(renderer, event_queue, clock, CELL_SIZE)
 

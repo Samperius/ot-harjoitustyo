@@ -2,7 +2,7 @@ import pygame
 
 
 class Train(pygame.sprite.Sprite):
-    def __init__(self, env, train_number, bottleneck, track, user_interface, game_loop, draw_or_not):
+    def __init__(self, env, train_number, bottleneck, track, user_interface, game_loop=False, draw_or_not=False):
         super().__init__()
         self.image = pygame.Surface([user_interface.cell_size, user_interface.cell_size])
         self.image.fill(pygame.Color(255, 0, 0, 255))
@@ -26,7 +26,6 @@ class Train(pygame.sprite.Sprite):
     def driving(self, bottleneck, track):
         last_stop = False
         next_bottleneck = False
-        waiting_time = 0
         while True:
             distance_to_stop = track.distance_to_stop(self.next_stop)
             speed = track.speed_to_stop(self.next_stop)
