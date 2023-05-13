@@ -2,6 +2,7 @@ import unittest
 import simpy
 import numpy as np
 import pygame
+import sys
 from entities.train import Train
 from entities.track import Track
 from repositories.track_repository import TrackRepository
@@ -58,4 +59,8 @@ class TestTrack(unittest.TestCase):
         after_move = self.train.rect.y
         self.assertEqual(before_move + 11, 410)
 
-       # def move_train(self, time_to_stop, one_km):
+    def test_print_next_stop(self, capfd):
+        shout = self.train.user_message('next_stop', True)
+        captured = capfd.readouterr()
+        print(captured)
+
