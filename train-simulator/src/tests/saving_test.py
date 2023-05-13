@@ -37,9 +37,8 @@ class TestTrackRepo(unittest.TestCase):
     def test_file_does_not_exist(self):
         self.saving.save_dataframe(self.data)
         self.df = pd.read_csv(RESULTS_PATH)
-        waiting = self.df.iloc[-1, 2]
+        waiting = self.df.iloc[0,2]
         self.assertEqual(waiting, 5.6)
-        os.remove(RESULTS_PATH)
 
 
 
