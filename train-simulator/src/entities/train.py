@@ -1,10 +1,11 @@
-import pygame
 import random
+import pygame
 
 
 class Train(pygame.sprite.Sprite):
     """
-        Train-luokka on sovelluslogiikan kannalta tärkein, sillä se vastaa yksittäisen junan toiminnasta
+        Train-luokka on sovelluslogiikan kannalta tärkein, sillä se vastaa
+        yksittäisen junan toiminnasta
 
         Attributes:
             name: merkkijono, joka kuvaa junan nimeä
@@ -14,9 +15,10 @@ class Train(pygame.sprite.Sprite):
             track: Track-luokan olio, joka vastaa radan tiedoista
             draw_or_not: Boolean arvo, joka kuvastaa animoidaanko simulaatio
             waiting time: float-arvo, joka pitää kirjaa odotusajasta/hukasta
-            user_interface: Ui-luokan  olio, joka vastaa käyttöliittymästä simulaation osalta
-        """
-    def __init__(self, env, train_number, bottleneck, track, user_interface, game_loop=False, draw_or_not=False):
+            user_interface: Ui-luokan  olio, joka vastaa käyttöliittymästä
+            simulaation osalta"""
+    def __init__(self, env, train_number, bottleneck, track,
+                 user_interface, game_loop=False, draw_or_not=False):
         """
         Luokan konstruktori
         :param env: Simpy environment-olio, joka vastaa simulaatioympäristöstä
@@ -43,8 +45,8 @@ class Train(pygame.sprite.Sprite):
         self.waiting_time = 0
 
     def start(self):
-        """
-        metodi, joka on tarkoitettu Simpy Environmentin prosessin käynnistykseen eli junan liikkeelle lähtöön
+        """metodi, joka on tarkoitettu Simpy Environmentin prosessin käynnistykseen
+        eli junan liikkeelle lähtöön
         :return:
         """
         self.env.process(self.driving(self.bottleneck, self.track))
@@ -120,7 +122,8 @@ class Train(pygame.sprite.Sprite):
     def move_train(self, time_to_stop, one_km):
         """
         metodi, joka kommunikoi käyttöliittymälle junan liikkeet oikeaan suuntaan
-        :param time_to_stop: float-arvo, joka kertoo kuinka kauan sallittua nopeutta kestää seuraavalle asemalle
+        :param time_to_stop: float-arvo, joka kertoo kuinka kauan
+        sallittua nopeutta kestää seuraavalle asemalle
         :param one_km:  float arvo, joka kertoo kuinka kauan yhden kilomoterin ajaminen kestää
         """
         direction = self.next_stop.split('-')[1]
