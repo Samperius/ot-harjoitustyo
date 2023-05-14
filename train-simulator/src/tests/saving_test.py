@@ -8,7 +8,7 @@ from config import dirname
 RESULTS_FILENAME = "test_results.csv"
 RESULTS_PATH = os.path.join(dirname, "..", "data", RESULTS_FILENAME)
 
-class TestTrackRepo(unittest.TestCase):
+class TestSaving(unittest.TestCase):
     def setUp(self):
         self.data = {'number_of_simulations': [1],
                 'number_of_trains': [4],

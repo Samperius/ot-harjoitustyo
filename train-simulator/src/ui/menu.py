@@ -6,6 +6,9 @@ from pygame_menu.examples import create_example_window
 from repositories.saving import Saving
 
 def start_many_simulation():
+    """
+    Käyttöliittymän funktio usealle simulaatiolle. Kutsuu tulosnäkymää, kun simulaatio on suoritettu
+    """
     global n_trains
     global n_sim
     global waiting_time
@@ -13,6 +16,9 @@ def start_many_simulation():
     waiting_time = np.asarray(waiting_time)
     results(False)
 def start_animated_simulation():
+    """
+        Käyttöliittymän funktio animoidulle simulaatiolle. Kutsuu tulosnäkymää, kun simulaatio on suoritettu
+    """
     global n_trains
     global waiting_time
     value = int(n_trains.get_value())
@@ -21,6 +27,9 @@ def start_animated_simulation():
     results(False)
 
 def save_results():
+    """
+    Käyttöliittymän funktio tulosten tallennukselle. Palaa Päävalikkoon tulosten tallennuksen jälkeen
+    """
     global n_trains
     global n_sim
     global waiting_time
@@ -36,6 +45,10 @@ def save_results():
     mainmenu()
 
 def mainmenu():
+    """
+    Päävalikko, joka aukeaa käyttäjälle ohjelman käynnistyttyä
+    :return:
+    """
     global n_trains
     global n_sim
     global waiting_time
@@ -57,6 +70,10 @@ def mainmenu():
     menu.mainloop(surface)
 
 def results(saved):
+    """
+    Tulosvalikko, joka aukeaa käyttäjälle, kun simulaaatio on ajettu.
+    :return:
+    """
     global n_trains
     global n_sim
     global waiting_time

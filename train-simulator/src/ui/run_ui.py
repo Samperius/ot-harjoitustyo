@@ -20,6 +20,10 @@ CELL_SIZE = 3
 
 
 def initialize_map():
+    """
+        Simulaatiokäyttöliitymän pohjan alustamiseen tarkoitettu funktio.
+        :return: palauttaa pohjan, jota simulaatiokäyttöliittymä tarvitsee
+        """
     MAP = np.zeros((height, width))
     connection = get_database_connection()
     track_repository = TrackRepository(connection)
@@ -44,6 +48,12 @@ def initialize_map():
     return MAP
 
 def run_many_simulations(n_trains, n_simulations):
+    """
+        Funktio, joka huolehtii käyttöliittymän käynnistyksestä luoden Simulaatio-luokan usean simulaation suorittamiseksi.
+        :param n_trains: Junien lukumäärä
+        :param n_simulations: Simulaatioiden lukumäärä
+        :return: palauttaa tulokset tallennusta ja esittämistä varten
+        """
     MAP = initialize_map()
     display_height = height * CELL_SIZE
     display_width = width * CELL_SIZE
@@ -62,6 +72,11 @@ def run_many_simulations(n_trains, n_simulations):
 
 
 def animate_single_simulations(n_trains):
+    """
+        Funktio, joka huolehtii käyttöliittymän käynnistyksestä luoden Simulaatio-luokan animoidun simulaation suorittamiseksi.
+        :param n_trains: Junien lukumäärä
+        :return: palauttaa tulokset tallennusta ja esittämistä varten
+        """
     MAP = initialize_map()
     display_height = height * CELL_SIZE
     display_width = width * CELL_SIZE
@@ -77,5 +92,4 @@ def animate_single_simulations(n_trains):
     result = simulation.simulate_animated()
     game_loop.start()
     return result
-
 

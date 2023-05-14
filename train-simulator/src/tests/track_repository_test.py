@@ -5,7 +5,7 @@ from initialize_database import create_tables, initialize_database
 
 
 
-class TestTrackRepo(unittest.TestCase):
+class TestTrackRepository(unittest.TestCase):
     def setUp(self):
         initialize_database()
         connection = get_database_connection()

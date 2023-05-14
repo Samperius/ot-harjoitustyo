@@ -1,8 +1,31 @@
 import pygame
+import random
 
 
 class Train(pygame.sprite.Sprite):
+    """
+        Train-luokka on sovelluslogiikan kannalta tärkein, sillä se vastaa yksittäisen junan toiminnasta
+
+        Attributes:
+            name: merkkijono, joka kuvaa junan nimeä
+            env: Simpy environment-olio, joka vastaa simulaatioympäristöstä
+            bottleneck: Simpy resource-olio, joka vastaa pullonkaulakohtien toiminnasta
+            next_stop: merkkijono, joka kuvaa junan seuraavaa kohdeasemaa
+            track: Track-luokan olio, joka vastaa radan tiedoista
+            draw_or_not: Boolean arvo, joka kuvastaa animoidaanko simulaatio
+            waiting time: float-arvo, joka pitää kirjaa odotusajasta/hukasta
+            user_interface: Ui-luokan  olio, joka vastaa käyttöliittymästä simulaation osalta
+        """
     def __init__(self, env, train_number, bottleneck, track, user_interface, game_loop=False, draw_or_not=False):
+        """
+        Luokan konstruktori
+        :param env: Simpy environment-olio, joka vastaa simulaatioympäristöstä
+        :param train_number: int-arvo, joka kuvaa junan numeroa. Käytetään junan nimessä.
+        :param bottleneck: Simpy resource-olio, joka vastaa pullonkaulakohtien toiminnasta
+        :param track: Track-luokan olio, joka vastaa radan tiedoista
+        :param user_interface: Ui-luokan  olio, joka vastaa käyttöliittymästä simulaation osalta
+        :param draw_or_not: Boolean arvo, joka kuvastaa animoidaanko simulaatio
+        """
         super().__init__()
         self.image = pygame.Surface([user_interface.cell_size, user_interface.cell_size])
         self.image.fill(pygame.Color(255, 0, 0, 255))
@@ -20,10 +43,20 @@ class Train(pygame.sprite.Sprite):
         self.waiting_time = 0
 
     def start(self):
+        """
+        metodi, joka on tarkoitettu Simpy Environmentin prosessin käynnistykseen eli junan liikkeelle lähtöön
+        :return:
+        """
         self.env.process(self.driving(self.bottleneck, self.track))
         return
 
     def driving(self, bottleneck, track):
+        """
+        metodi, joka vastaa junan kulusta asemalta toiselle
+        :param bottleneck: Simpy resource-olio, joka vastaa pullonkaulakohtien toiminnasta
+        :param track: Track-luokan olio, joka vastaa radan tiedoista
+        :return:
+        """
         last_stop = False
         next_bottleneck = False
         while True:
@@ -49,7 +82,7 @@ class Train(pygame.sprite.Sprite):
                 with bottleneck.request() as req:
                     waiting_started = self.env.now
                     yield req
-                    yield self.env.timeout(0.1)
+                    yield self.env.timeout(random.lognormvariate(0.1,0.05))
                     self.waiting_time += self.env.now - waiting_started
                     self.user_message('bottleneck_passed', True)
                     next_bottleneck = False
@@ -67,6 +100,11 @@ class Train(pygame.sprite.Sprite):
 
 
     def user_message(self, command, print_or_not):
+        """
+        Metodi joka tuottaa käyttäjälle tulosteita
+        :param command: merkkijono, joka kertoo mitä käyttäjälle tulostetaan
+        :param print_or_not: Boolean arvo, jonka avulla mahdollisuus jättää printit pois
+        """
         if print_or_not:
             if command == 'next_stop':
                 print(
@@ -80,6 +118,11 @@ class Train(pygame.sprite.Sprite):
                 print(f"{self.name}: trip complete")
 
     def move_train(self, time_to_stop, one_km):
+        """
+        metodi, joka kommunikoi käyttöliittymälle junan liikkeet oikeaan suuntaan
+        :param time_to_stop: float-arvo, joka kertoo kuinka kauan sallittua nopeutta kestää seuraavalle asemalle
+        :param one_km:  float arvo, joka kertoo kuinka kauan yhden kilomoterin ajaminen kestää
+        """
         direction = self.next_stop.split('-')[1]
         if time_to_stop < one_km:
             multiplier = time_to_stop/one_km

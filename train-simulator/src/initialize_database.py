@@ -4,6 +4,10 @@ from config import TRACK_INFO_PATH, STOP_COORDINATE_PATH
 
 
 def drop_tables(connection):
+    """
+    funktio, joka poistaa kaikki taulut tietokannasta
+    :param connection: sqlite3.connect muuttuja
+    """
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -21,6 +25,10 @@ def drop_tables(connection):
 
 
 def create_tables(connection):
+    """
+    funktio, joka lukee csv tiedostot radalle ja tekee niistä tietokantataulut
+    :param connection: sqlite3.connect muuttuja
+    """
     cursor = connection.cursor()
     #track:
     cursor.execute('''
@@ -46,9 +54,15 @@ def create_tables(connection):
     stop_coordinates.to_sql('stop_coordinates', connection, if_exists='append', index=False)
 
 def initialize_database():
+    """
+    funktio, joka luo yhteyden, poistaa taulut ja luo uudet
+    :return: sqlite3.connect muuttuja
+    """
     connection = get_database_connection()
 
     drop_tables(connection)
     create_tables(connection)
     return connection
 
+if __name__ == "__main__":
+    initialize_database()
