@@ -2,8 +2,8 @@
 ## Lyhyt kuvaus
 Sovelluksen avulla pystytään simuloimaan junaverkoston liikennemääriä ja verkoston pullonkaulakohtiin liittyvää junien turhaa odotusaikaa. 
 
-## Releaset
- [viikko 5 release](https://github.com/Samperius/ot-harjoitustyo/releases/tag/viikko7)
+## Release
+ [Loppupalautus](https://github.com/Samperius/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Dokumentaatio
 [Työaikakirjanpito](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/tyoaikakirjanpito.md)
