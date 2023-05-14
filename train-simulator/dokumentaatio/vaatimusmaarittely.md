@@ -30,6 +30,7 @@ Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli: normaali käytt
 - Käyttöliitymässä käyttäjän on mahdollista valita haluamansa junien ja simulaatioiden määrä.
 	- Yksittäinen simulaatio on mahdollista animoida yksinkertaiseen koordinaatistoon.
 - Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä.
+- Ohjelma tulostaa simulaation etenemisen asemalta asemalle.
 - Simulaation jälkeen ohjelma näyttää tulokset ja mahdollistaa tallentamisen.
 
 ## Jatkokehitysideoita
