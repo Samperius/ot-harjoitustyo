@@ -16,6 +16,8 @@ Sovelluksen avulla pystytään simuloimaan junaverkoston liikennemääriä ja ve
 
 [Käyttöohje](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/kaytto-ohje.md)
 
+[testaus](https://github.com/Samperius/ot-harjoitustyo/blob/main/train-simulator/dokumentaatio/testaus.md)
+
 ## Asennus
 
 1. Asenna riippuvuudet komennolla:
