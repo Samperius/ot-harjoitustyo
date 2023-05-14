@@ -1,43 +1,43 @@
 # Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
-
-Sovelluksen avulla pystytään simuloimaan junaverkoston liikennemääriä ja verkoston pullonkaulakohtiin liittyvää junien turhaa odotusaikaa. Perusversiossa malllinnetaan ja simuloidaan vain yksi rataväli, mutta jatkokehityksenä / laajennuksena on mahdollista lisätä myös muita ratavälejä.
+Sovelluksen avulla pystytään simuloimaan junien kulkua ohjelmalle määritetyssä junaverkossa.  Olennaisia simulaatioissa ovat ns. pullonkaulakohdat. Junaradan pullonkaulakohtia ovat paikat, joissa ei ole rataa kuin yhdelle junalle kerrallaan. Pohjimmillaan kyseessä on prototyyppi, jolla osoitetaan, että junaradan pullonkaulakohtien vaikutusta junien kulkuun tai viivästymisiin on mahdollista kvantifioida simulaattorin avulla.
 
 ## Käyttäjät
 
-Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä.	
+Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli: normaali käyttäjä.	
 
-## Käyttöliittymäluonnos
 ## Perusversion tarjoama toiminnallisuus 
 
 ### Avaintiedot 
-- Ohjelmaan ei tarvitse kirjautua - tehty (ei vaadi toimenpiteitä)
-- Ohjelmalla voi ajaa n määrän testiskenaarioita haluamillaan parametreilla - työn alla
-- Ohjelmalla voi tallettaa testiskenaarioita ja avata aiemmin simuloituja skenaarioita - aloittamatta
+- Ohjelma etenee kolmen näkymän välillä valikko-simulaationäkymä-tallennusvalikko.
+- Ohjelmaan ei tarvitse kirjautua
+- Ohjelma lukee csv-tiedostossa määritellyn rataverkon, tallentaa sen tietokantaan ja generoi radalle käyttäjän määrittelemän määrän junia.
+- Ohjelmalla voi ajaa n määrän testiskenaarioita haluamallaan junamäärällä.
+- Ohjelmalla voi tallettaa testiskenaarioita csv-muodossa.
 
 ## Simulaatio
+- Rataverkossa jokaiselle asemavälille on määritetty etäisyys ja sallittu kulkunopeus.
 - Ohjelma simuloi junan kulkua rataosuudella:
-	- Juna liikkuu sallitulla nopeudella - **tehty**
-	- Radan pullonkaulakohdista kulkee yksi juna kerrallaan, ja muut odottavat vuoroaan - **tehty**
-	- Juna kulkee pysäkiltä toiselle kunnes saavuttaa määränpäänsä - **tehty**
-	- Useampien junien simulointi on mahdollista - **tehty**
-- Ohjelma simuloi annetulle aikavälille liikenteen:
-	- Käyttäjä pystyy muuttamaan liikennemääriä suhteessa base-skanaarioon **osin tehty**
-	- Käyttäjä pystyy muuttamaan logiikkaa, jolla junat ohittavat pullonkaulakohdat:
-		- esim. First In First Out (FIFO) tai First In Last Out (LIFO)
+	- Juna liikkuu sallitulla nopeudella
+	- Radan pullonkaulakohdista kulkee yksi juna kerrallaan, ja muut odottavat vuoroaan
+	- Juna kulkee pysäkiltä toiselle kunnes saavuttaa määränpäänsä
+	- Useampien junien simulointi on mahdollista
 - Ohjelma laskee simulaatioiden pohjalta:
 	- verkoston pullonkaulojen aiheuttaman odotusajan eli hukan 
 
 ## Käyttöliittymä:
-- Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä. - Yksinkertaistetun käyttöliittymän v.1.0 **tehty**
-- Käyttöliittymässä parametrien muuttaminen on mahdollista **osin tehty**
+- Käyttöliitymässä käyttäjän on mahdollista valita haluamansa junien ja simulaatioiden määrä.
+	- Yksittäinen simulaatio on mahdollista animoida yksinkertaiseen koordinaatistoon.
+- Käyttöliittymä visualisoi junien kulun asemien välillä ja mahdollistaa yksinkertaisen simuloinnin kuten kuvattu ylempänä.
+- Simulaation jälkeen ohjelma näyttää tulokset ja mahdollistaa tallentamisen.
 
 ## Jatkokehitysideoita
+- Junien simulointi aikataulujen mukaisesti.
+- Asemille voisi luoda rajoitetun kapasiteetin, jolloin myös asemien kapasiteettia pystyisi testaamaan.
 - Ohjelma voisi hakea simulaation pohjaksi perustiedot junaliikenteestä digitraffic.fi sivulta hyödyntäen avoimen datan GraphQL-rajapintaa
 	- Kuinka paljon junia ratavälillä keskimäärin liikkuu
 	- mikä on junien nopeus eri vaiheissa rataa
 	- mahdollisesti muita parametreja simuloinnin tueksi (tarkentuu myöhemmin)
-- Ohjelma on laajennettavissa kattamaan useita ratavälejä. Lopullinen tavoite tulisi olla mallintaa koko rataverkko, sillä liikenteen dynamiikka yhdellä ratavälillä vaikuttaa liikenteeseen muilla rataväleillä. **tehty**
-- Ohjelmaa voisi jatkokehittää, niin että se automaattisesti etsisi optimaalista logiikkaa, jolla junat tulisi ohjata pullonkaulakohtien läpi, niin että päästäisiin pienimpään mahdolliseen odotusaikaan eli hukkaan.(Reinforcement Learning)
+- Ohjelmaa voisi jatkokehittää, niin että se automaattisesti etsisi optimaalista logiikkaa, jolla junat tulisi ohjata pullonkaulakohtien läpi, niin että päästäisiin pienimpään mahdolliseen odotusaikaan eli hukkaan.(Reinforcement Learning).
 
